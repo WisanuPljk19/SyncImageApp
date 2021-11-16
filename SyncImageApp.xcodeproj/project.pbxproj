@@ -24,6 +24,7 @@
 		36A0BC5A2743619800959996 /* DateTimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC592743619800959996 /* DateTimeUtils.swift */; };
 		36A0BC5E2743835300959996 /* ImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC5D2743835300959996 /* ImageItem.swift */; };
 		36A0BC61274384EA00959996 /* UICircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC60274384EA00959996 /* UICircleView.swift */; };
+		36A0BC6427439DC000959996 /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = 36A0BC6327439DC000959996 /* RxRealm */; };
 		36D0A7EA2742521300ABD08E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A7E92742521300ABD08E /* AppDelegate.swift */; };
 		36D0A7EC2742521300ABD08E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A7EB2742521300ABD08E /* SceneDelegate.swift */; };
 		36D0A7EE2742521300ABD08E /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A7ED2742521300ABD08E /* GalleryViewController.swift */; };
@@ -121,6 +122,7 @@
 				36A0BC402742BB3100959996 /* RxSwift in Frameworks */,
 				36D0A829274252FE00ABD08E /* FirebaseStorageSwift-Beta in Frameworks */,
 				36D0A8332742543F00ABD08E /* Realm in Frameworks */,
+				36A0BC6427439DC000959996 /* RxRealm in Frameworks */,
 				36D0A821274252FE00ABD08E /* FirebaseStorageCombine-Community in Frameworks */,
 				36D0A82E274253F700ABD08E /* SwiftyBeaver in Frameworks */,
 				36D0A8312742543F00ABD08E /* RealmSwift in Frameworks */,
@@ -394,6 +396,7 @@
 				36D0A8322742543F00ABD08E /* Realm */,
 				36A0BC3D2742BB3100959996 /* RxCocoa */,
 				36A0BC3F2742BB3100959996 /* RxSwift */,
+				36A0BC6327439DC000959996 /* RxRealm */,
 			);
 			productName = SyncImageApp;
 			productReference = 36D0A7E62742521300ABD08E /* SyncImageApp.app */;
@@ -471,6 +474,7 @@
 				36D0A82C274253F600ABD08E /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 				36D0A82F2742543F00ABD08E /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				36A0BC3C2742BB3000959996 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				36A0BC6227439DC000959996 /* XCRemoteSwiftPackageReference "RxRealm" */,
 			);
 			productRefGroup = 36D0A7E72742521300ABD08E /* Products */;
 			projectDirPath = "";
@@ -879,6 +883,14 @@
 				minimumVersion = 6.2.0;
 			};
 		};
+		36A0BC6227439DC000959996 /* XCRemoteSwiftPackageReference "RxRealm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxRealm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.3;
+			};
+		};
 		36D0A819274252FE00ABD08E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -915,6 +927,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 36A0BC3C2742BB3000959996 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		36A0BC6327439DC000959996 /* RxRealm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 36A0BC6227439DC000959996 /* XCRemoteSwiftPackageReference "RxRealm" */;
+			productName = RxRealm;
 		};
 		36D0A81A274252FE00ABD08E /* FirebaseDatabase */ = {
 			isa = XCSwiftPackageProductDependency;

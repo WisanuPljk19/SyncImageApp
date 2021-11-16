@@ -6,22 +6,47 @@
 //
 
 import UIKit
+import RxSwift
 
 class GalleryViewController: UIViewController {
     
     var picker = UIImagePickerController();
     var alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
     
+    var onProcess = PublishSubject<(String, Float)>()
+    var onSuccess = PublishSubject<String>()
+    
     lazy var viewModel = {
-        return GalleryViewModel(self)
+        return GalleryViewModel(GalleryViewOutput.init(onProcess: onProcess,
+                                                       onSuccess: onSuccess))
     }()
+    
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    }
+    
+    private func setupReactive(){
+        onSuccess.asObservable().subscribe(onNext: { id in
+            Log.info("onSuccess: \(id)")
+        }).disposed(by: disposeBag)
+        
+        onProcess.asObservable().subscribe(onNext: { id, percentComplete in
+            print("onSyncProgress: \(id), \(percentComplete)")
+        }).disposed(by: disposeBag)
+        
+        viewModel.subscribeTask()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        viewModel.unsubscribeTask()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        setupReactive()
+        
         let cameraAction = UIAlertAction(title: "Camera", style: .default){
             UIAlertAction in
             self.openCamera()
@@ -70,26 +95,6 @@ class GalleryViewController: UIViewController {
 
 }
 
-extension GalleryViewController: GalleryViewOutput {
-    func onSuncAllSuccess() {
-        Log.info("onSuncAllSuccess")
-    }
-    
-    func onSyncSuccess(id: String) {
-        Log.info("onSyncSuccess: \(id)")
-    }
-    
-    func onSyncFailure(id: String, desc: String) {
-        Log.info("onSyncFailure: \(id), \(desc)")
-    }
-    
-    func onSyncProgress(id: String, percentage: Double) {
-        Log.info("onSyncProgress: \(id), \(percentage)")
-    }
-    
-
-}
-
 extension GalleryViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
@@ -108,8 +113,7 @@ extension GalleryViewController: UIImagePickerControllerDelegate, UINavigationCo
                                  isOpaque: fileType.uppercased() == Constant.FILE_JPEG || fileType.uppercased() == Constant.FILE_HEIC) else{
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
-        
-        
+
         let imageName = viewModel.generateFileName(fileType: fileType)
         
         guard let localPath = StorageManager.shared.saveImage(imageName: imageName, image: image) else {

@@ -9,12 +9,10 @@ import Foundation
 import UIKit
 
 class Utils {
-    class func calculatePercentComplete(complete: Double, total: Double) -> Double{
+    
+    class func calculatePercentComplete(complete: Float, total: Float) -> Float{
         return 100.0 * complete / total
     }
     
-    func isImageSizeGeaterMoreThan(_ imageSize: Int, maximumSize: Int) -> Bool{
-        return imageSize < maximumSize
-    }
 }
 

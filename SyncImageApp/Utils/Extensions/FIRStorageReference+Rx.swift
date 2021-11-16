@@ -20,7 +20,7 @@ extension Reactive where Base: StorageReference {
      * @param completion A completion block that either returns the object metadata on success,
      * or an error on failure.
      */
-    public func putData(_ uploadData: Data, metadata: StorageMetadata? = nil) -> Observable<StorageMetadata> {
+    func putData(_ uploadData: Data, metadata: StorageMetadata? = nil) -> Observable<StorageMetadata> {
         return Observable.create { observer in
             let task = self.base.putData(uploadData, metadata: metadata) { metadata, error in
                 guard let error = error else {
@@ -46,7 +46,7 @@ extension Reactive where Base: StorageReference {
      * @param completion A completion block that either returns the object metadata on success,
      * or an error on failure.
      */
-    public func putFile(from url: URL, metadata: StorageMetadata? = nil) -> Observable<StorageMetadata> {
+    func putFile(from url: URL, metadata: StorageMetadata? = nil) -> Observable<StorageMetadata> {
         return Observable.create { observer in
             let task = self.base.putFile(from: url, metadata: metadata) { metadata, error in
                 guard let error = error else {
@@ -73,7 +73,7 @@ extension Reactive where Base: StorageReference {
      * @param completion A completion block that either returns the object data on success,
      * or an error on failure.
      */
-    public func getData(maxSize: Int64) -> Observable<Data> {
+    func getData(maxSize: Int64) -> Observable<Data> {
         return Observable.create { observer in
             let task = self.base.getData(maxSize: maxSize) { data, error in
                 guard let error = error else {
@@ -98,7 +98,7 @@ extension Reactive where Base: StorageReference {
      * @param completion A completion block that either returns the URL on success,
      * or an error on failure.
      */
-    public func downloadURL() -> Observable<URL> {
+    func downloadURL() -> Observable<URL> {
         return Observable.create { observer in
             self.base.downloadURL { url, error in
                 guard let error = error else {
@@ -121,7 +121,7 @@ extension Reactive where Base: StorageReference {
      * Returns an NSURL pointing to the file path of the downloaded file on success,
      * or an error on failure.
      */
-    public func write(toFile url: URL) -> Observable<URL> {
+    func write(toFile url: URL) -> Observable<URL> {
         return Observable.create { observer in
             let task = self.base.write(toFile: url) { url, error in
                 guard let error = error else {
@@ -144,7 +144,7 @@ extension Reactive where Base: StorageReference {
      * @param completion A completion block which returns the object metadata on success,
      * or an error on failure.
      */
-    public func getMetadata() -> Observable<StorageMetadata> {
+    func getMetadata() -> Observable<StorageMetadata> {
         return Observable.create { observer in
             self.base.getMetadata { metadata, error in
                 guard let error = error else {
@@ -166,7 +166,7 @@ extension Reactive where Base: StorageReference {
      * @param completion A completion block which returns the FIRStorageMetadata on success,
      * or an error on failure.
      */
-    public func updateMetadata(_ metadata: StorageMetadata) -> Observable<StorageMetadata> {
+    func updateMetadata(_ metadata: StorageMetadata) -> Observable<StorageMetadata> {
         return Observable.create { observer in
             self.base.updateMetadata(metadata) { metadata, error in
                 guard let error = error else {
@@ -186,7 +186,7 @@ extension Reactive where Base: StorageReference {
      * Deletes the object at the current path.
      * @param completion A completion block which returns nil on success, or an error on failure.
      */
-    public func delete() -> Observable<Void> {
+    func delete() -> Observable<Void> {
         return Observable.create { observer in
             self.base.delete { error in
                 guard let error = error else {

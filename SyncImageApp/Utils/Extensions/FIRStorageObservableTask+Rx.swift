@@ -16,7 +16,7 @@ extension Reactive where Base: StorageObservableTask {
      * @param handler A callback that fires every time the status event occurs,
      * returns a FIRStorageTaskSnapshot containing the state of the task.
      */
-    public func observe(_ status: StorageTaskStatus) -> Observable<StorageTaskSnapshot> {
+    func observe(_ status: StorageTaskStatus) -> Observable<StorageTaskSnapshot> {
         return Observable.create { observer in
             let handle = self.base.observe(status) { snapshot in
                 observer.onNext(snapshot)

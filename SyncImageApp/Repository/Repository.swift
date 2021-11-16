@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import UIKit
+import RxSwift
 
 final class Repository {
     
@@ -28,11 +28,17 @@ final class Repository {
         return realmManager.updateImageEntity(id: imageData.id, syncDate: imageData.syncDate, remotePath: imageData.remotePath) != nil
     }
     
-    func uploadImage(imageData: ImageData,
-                     onProcess onProcessHandler: ((String, Double) -> Void)? = nil,
-                     onSuccess onSuccessHandler: ((String, String) -> Void)? = nil,
-                     onFailure onFailureHandler: ((String, String) -> Void)? = nil) {
-        remoteStorageManager.uploadImage(imageData, onProcess: onProcessHandler, onSuccess: onSuccessHandler, onFailure: onFailureHandler)
+    func uploadImage(imageData: ImageData, onSuccess onSuccessHandler: ((String, String) -> Void)? = nil) {
+        remoteStorageManager.uploadImage(imageData, onSuccess: onSuccessHandler)
+    }
+    
+    func subscribeUploadTask(onProcess onProcessHandler: PublishSubject<(String, Float)>?,
+                             onSuccess onSuccessHandler: PublishSubject<String>?){
+        remoteStorageManager.subscribeUploadTask(onProcess: onProcessHandler, onSuccess: onSuccessHandler)
+    }
+    
+    func unsubscribeUploadTask(){
+        remoteStorageManager.unsubscribeUploadTask()
     }
     
 }

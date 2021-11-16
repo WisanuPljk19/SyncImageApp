@@ -6,12 +6,11 @@
 //
 
 import Foundation
+import RxSwift
 
-protocol GalleryViewOutput {
-    func onSuncAllSuccess()
-    func onSyncSuccess(id: String)
-    func onSyncFailure(id: String, desc: String)
-    func onSyncProgress(id: String,  percentage: Double)
+struct GalleryViewOutput {
+    var onProcess: PublishSubject<(String, Float)>
+    var onSuccess: PublishSubject<String>
 }
 
 class GalleryViewModel {
@@ -44,22 +43,29 @@ class GalleryViewModel {
     
     private func uploadImage(){
         guard imageListOffline.count > 0 else {
-            galleryViewOutput?.onSuncAllSuccess()
+//            galleryViewOutput?.onSuncAllSuccess()
             return
         }
         
         let imageData = imageListOffline.removeFirst()
         
         repository.uploadImage(imageData: imageData,
-                               onProcess: galleryViewOutput?.onSyncProgress,
                                onSuccess: { id, remotePath in
                                 imageData.remotePath = remotePath
                                 imageData.syncDate = Date()
                                 if self.repository.updateImageData(imageData: imageData) {
-                                    self.galleryViewOutput?.onSyncSuccess(id: id)
+//                                    self.galleryViewOutput?.onSyncSuccess(id: id)
                                 }
                                 self.uploadImage()
-                               }, onFailure: galleryViewOutput?.onSyncFailure)
+                               })
+    }
+    
+    func subscribeTask(){
+        repository.subscribeUploadTask(onProcess: galleryViewOutput?.onProcess, onSuccess: galleryViewOutput?.onSuccess)
+    }
+    
+    func unsubscribeTask(){
+        repository.unsubscribeUploadTask()
     }
     
     func generateFileName(fileType: String) -> String{

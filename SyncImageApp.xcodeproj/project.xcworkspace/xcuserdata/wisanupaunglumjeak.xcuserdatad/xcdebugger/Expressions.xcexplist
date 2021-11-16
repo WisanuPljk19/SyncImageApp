@@ -3,6 +3,33 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "GalleryViewModel.subscribeTask():GalleryViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "galleryViewOutput?.onProcess">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FirebaseStorageManager.uploadImage(_:onSuccess:):FirebaseStorageManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Utils.appDelegate().isTaskDoing">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FirebaseStorageManager.subscribeUploadTask(onProcess:onSuccess:):FirebaseStorageManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "uploadTask">
+            </PersistentString>
+            <PersistentString
+               value = " Utils.appDelegate().isTaskDoing">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ViewController.imagePickerController(_:didFinishPickingMediaWithInfo:):ViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -20,6 +47,9 @@
                value = "isOpaque">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in FirebaseStorageManager.subscribeUploadTask(onProcess:onSuccess:):FirebaseStorageManager.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

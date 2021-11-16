@@ -15,6 +15,7 @@ final class RealmManager {
     var realm: Realm
     
     private init() {
+        
         do {
             let realmConfig = Realm.Configuration(schemaVersion: 1)
             self.realm = try Realm(configuration: realmConfig)
