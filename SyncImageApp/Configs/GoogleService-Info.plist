@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>629513213137-31a657blpo99plurqgp9teivp898k0c4.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.629513213137-31a657blpo99plurqgp9teivp898k0c4</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBagHUYNYS1yWGUn3H-cm9ncuXIlD_VsCk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>629513213137</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>eigthyear.studio.SyncImageApp</string>
+	<key>PROJECT_ID</key>
+	<string>eigthyear-studio-sync-photos</string>
+	<key>STORAGE_BUCKET</key>
+	<string>eigthyear-studio-sync-photos.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:629513213137:ios:b07f6310d834f30a2fa1f0</string>
+</dict>
+</plist>
