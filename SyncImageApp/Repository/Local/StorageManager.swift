@@ -16,14 +16,12 @@ final class StorageManager {
         
     }
     
-    func saveImage(imageName: String, image: UIImage) -> URL? {
+    func saveImage(imageName: String, image: UIImage) -> String? {
         
-        guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        guard let documentsDirectory = Utils.getDocumentDir() else {
             return nil
         }
-        
-        print(documentsDirectory.absoluteString)
-        
+
         let fileName = imageName
         
         guard let data = image.jpegData(compressionQuality: 1) else {
@@ -49,7 +47,7 @@ final class StorageManager {
         } catch let error {
             print("error saving file with error", error)
         }
-        return fileURL
+        return "\(Constant.DIR_IMAGE_BUCKET)/\(fileName)"
     }
     
 }

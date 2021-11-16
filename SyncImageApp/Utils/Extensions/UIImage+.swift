@@ -35,5 +35,4 @@ extension UIImage {
                              percentage: percentage,
                              isOpaque: isOpaque)
     }
-    
 }

@@ -19,6 +19,10 @@ final class Repository {
         self.realmManager = RealmManager.shared
         self.remoteStorageManager = FirebaseStorageManager.shared
     }
+    
+    func getImageEntity(isSync: Bool? = nil) -> [ImageData] {
+        return realmManager.getImageEntities(isSync: isSync).map{ ImageData.buildImageDataFrom(imageEntity: $0) }
+    }
 
     func saveImageData(imageData: ImageData) -> Bool{
         return realmManager.saveImageEntity(imageEntity: ImageEntity.createImageEntityFrom(imageData: imageData)) != nil

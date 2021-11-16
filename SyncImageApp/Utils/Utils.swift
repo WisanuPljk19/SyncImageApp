@@ -14,5 +14,8 @@ class Utils {
         return 100.0 * complete / total
     }
     
+    class func getDocumentDir() -> URL?{
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+    }
 }
 

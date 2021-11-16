@@ -15,13 +15,20 @@ final class RealmManager {
     var realm: Realm
     
     private init() {
-        
         do {
             let realmConfig = Realm.Configuration(schemaVersion: 1)
             self.realm = try Realm(configuration: realmConfig)
         } catch {
             fatalError(error.localizedDescription)
         }
+    }
+    
+//    func getImageEntityObjects() -> Results<ImageEntity>{
+//        return realm.objects(ImageEntity.self)
+//    }
+    
+    func getImageEntities(isSync: Bool?) -> [ImageEntity] {
+        return realm.objects(ImageEntity.self).toList(of: ImageEntity.self)
     }
     
     func saveImageEntity(imageEntity: ImageEntity) -> ImageEntity?{

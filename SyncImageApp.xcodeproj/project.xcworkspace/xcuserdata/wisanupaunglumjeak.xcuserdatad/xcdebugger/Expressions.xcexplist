@@ -11,14 +11,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "FirebaseStorageManager.uploadImage(_:onSuccess:):FirebaseStorageManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "Utils.appDelegate().isTaskDoing">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "FirebaseStorageManager.subscribeUploadTask(onProcess:onSuccess:):FirebaseStorageManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -30,10 +22,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ViewController.imagePickerController(_:didFinishPickingMediaWithInfo:):ViewController.swift">
+         contextName = "FirebaseStorageManager.uploadImage(_:onSuccess:):FirebaseStorageManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "info[.imageURL] as? URL">
+               value = "Utils.appDelegate().isTaskDoing">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -50,6 +42,22 @@
       </ContextState>
       <ContextState
          contextName = "closure #1 in FirebaseStorageManager.subscribeUploadTask(onProcess:onSuccess:):FirebaseStorageManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ImageItem.setItem(imageData:):ImageItem.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageData.localPath">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.imagePickerController(_:didFinishPickingMediaWithInfo:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "info[.imageURL] as? URL">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

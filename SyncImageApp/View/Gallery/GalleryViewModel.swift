@@ -25,11 +25,11 @@ class GalleryViewModel {
     
     init(_ output: GalleryViewOutput?) {
         self.repository = Repository.shared
-        self.imageList = []
+        self.imageList = repository.getImageEntity()
         self.imageListOffline = []
         self.galleryViewOutput = output
     }
-    
+        
     func saveImageData(imageData: ImageData){
         if repository.saveImageData(imageData: imageData){
             imageList.append(imageData)
