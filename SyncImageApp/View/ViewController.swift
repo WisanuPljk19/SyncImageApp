@@ -68,37 +68,6 @@ class ViewController: UIViewController {
         picker.dismiss(animated: true, completion: nil)
     }
 
-    func saveImage(imageName: String, image: UIImage) -> URL? {
-        
-        guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            return nil
-        }
-        
-        let fileName = imageName
-        let fileURL = documentsDirectory.appendingPathComponent(fileName)
-        guard let data = image.jpegData(compressionQuality: 1) else {
-            return nil
-        }
-        
-        //Checks if file exists, removes it if so.
-        if FileManager.default.fileExists(atPath: fileURL.path) {
-            do {
-                try FileManager.default.removeItem(atPath: fileURL.path)
-                print("Removed old image")
-            } catch let removeError {
-                print("couldn't remove file at path", removeError)
-            }
-            
-        }
-        
-        do {
-            try data.write(to: fileURL)
-        } catch let error {
-            print("error saving file with error", error)
-        }
-        return fileURL
-    }
-    
 }
 
 extension ViewController: GalleryViewOutput {
@@ -125,26 +94,27 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         /**
-         /Users/wisanupaunglumjeak/Library/Developer/CoreSimulator/Devices/729E1336-D65B-414F-80D3-F6BBB36E27B8/data/Containers/Data/Application/0E3B3C6C-88B0-4AEE-A355-1C04F3B732B9/Documents
+         /Users/wisanupaunglumjeak/Library/Developer/CoreSimulator/Devices/729E1336-D65B-414F-80D3-F6BBB36E27B8/data/Containers/Data/Application/0B3893AF-A105-40B3-A89F-F5F40F8CFCBA/Documents/
         */
         guard let image = (info[.originalImage] as? UIImage)?
                 .recursiveReduce(expectSize: Constant.FILE_LIMIT_SIZE,
                                  percentage: 0.8) else{
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
-    
-        for i in 1...5 {
-            let fileURL = info[.imageURL] as? URL
-            let imageData = ImageData()
-            imageData.id = UUID().uuidString
-            imageData.name = fileURL != nil ?  "\(i)_\(fileURL!.lastPathComponent)" : "image.jpeg"
-            imageData.contentType = "image/\(fileURL?.pathExtension ?? "jpeg")"
-            guard let localPath = saveImage(imageName: imageData.name, image: image) else {
-                return
-            }
-            imageData.localPath = localPath.absoluteString
-            viewModel.imageList.append(imageData)
+        let fileURL = info[.imageURL] as? URL
+        
+        let imageName = viewModel.generateFileName(fileType: fileURL?.pathExtension ?? "jpeg")
+        
+        guard let localPath = StorageManager.shared.saveImage(imageName: imageName, image: image) else {
+            return
         }
+        
+        let imageData = ImageData(id: UUID().uuidString,
+                                  name: imageName,
+                                  localPath: localPath.absoluteString,
+                                  contentType: "image/\(fileURL?.pathExtension ?? "jpeg")")
+        
+        viewModel.saveImageData(imageData: imageData)
         viewModel.syncImageUp()
     }
 }

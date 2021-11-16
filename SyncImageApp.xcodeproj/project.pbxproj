@@ -15,8 +15,13 @@
 		36A0BC3E2742BB3100959996 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 36A0BC3D2742BB3100959996 /* RxCocoa */; };
 		36A0BC402742BB3100959996 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 36A0BC3F2742BB3100959996 /* RxSwift */; };
 		36A0BC422742BC1300959996 /* FIRStorageObservableTask+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC412742BC1300959996 /* FIRStorageObservableTask+Rx.swift */; };
-		36A0BC452742BCBD00959996 /* SyncEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC442742BCBD00959996 /* SyncEvent.swift */; };
 		36A0BC4727433BF900959996 /* FIRStorageReference+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC4627433BF900959996 /* FIRStorageReference+Rx.swift */; };
+		36A0BC4927434C6500959996 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC4827434C6500959996 /* RealmManager.swift */; };
+		36A0BC4F274355EE00959996 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC4E274355EE00959996 /* Repository.swift */; };
+		36A0BC512743564B00959996 /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC502743564B00959996 /* ImageData.swift */; };
+		36A0BC5527435F7300959996 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC5427435F7300959996 /* StorageManager.swift */; };
+		36A0BC582743611000959996 /* DateTimeFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC572743611000959996 /* DateTimeFormat.swift */; };
+		36A0BC5A2743619800959996 /* DateTimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC592743619800959996 /* DateTimeUtils.swift */; };
 		36D0A7EA2742521300ABD08E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A7E92742521300ABD08E /* AppDelegate.swift */; };
 		36D0A7EC2742521300ABD08E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A7EB2742521300ABD08E /* SceneDelegate.swift */; };
 		36D0A7EE2742521300ABD08E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A7ED2742521300ABD08E /* ViewController.swift */; };
@@ -39,7 +44,7 @@
 		36D0A8332742543F00ABD08E /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 36D0A8322742543F00ABD08E /* Realm */; };
 		36D0A83A2742550400ABD08E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A8382742550400ABD08E /* Utils.swift */; };
 		36D0A83B2742550400ABD08E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A8392742550400ABD08E /* Logger.swift */; };
-		36D0A83F2742554B00ABD08E /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A83E2742554B00ABD08E /* ImageData.swift */; };
+		36D0A83F2742554B00ABD08E /* ImageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A83E2742554B00ABD08E /* ImageEntity.swift */; };
 		36D0A845274255AA00ABD08E /* FirebaseStorageConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A843274255AA00ABD08E /* FirebaseStorageConfigs.swift */; };
 		36D0A846274255AA00ABD08E /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A844274255AA00ABD08E /* FirebaseStorageManager.swift */; };
 		36D0A84B274259CE00ABD08E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36D0A84A274259CE00ABD08E /* GoogleService-Info.plist */; };
@@ -69,8 +74,13 @@
 		36A0BC382742B03C00959996 /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
 		36A0BC3A2742B71900959996 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		36A0BC412742BC1300959996 /* FIRStorageObservableTask+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FIRStorageObservableTask+Rx.swift"; sourceTree = "<group>"; };
-		36A0BC442742BCBD00959996 /* SyncEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncEvent.swift; sourceTree = "<group>"; };
 		36A0BC4627433BF900959996 /* FIRStorageReference+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FIRStorageReference+Rx.swift"; sourceTree = "<group>"; };
+		36A0BC4827434C6500959996 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		36A0BC4E274355EE00959996 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		36A0BC502743564B00959996 /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
+		36A0BC5427435F7300959996 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		36A0BC572743611000959996 /* DateTimeFormat.swift */ = {isa = PBXFileReference; indentWidth = 5; lastKnownFileType = sourcecode.swift; path = DateTimeFormat.swift; sourceTree = "<group>"; };
+		36A0BC592743619800959996 /* DateTimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeUtils.swift; sourceTree = "<group>"; };
 		36D0A7E62742521300ABD08E /* SyncImageApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SyncImageApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36D0A7E92742521300ABD08E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36D0A7EB2742521300ABD08E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,7 +97,7 @@
 		36D0A80D2742521700ABD08E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36D0A8382742550400ABD08E /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		36D0A8392742550400ABD08E /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		36D0A83E2742554B00ABD08E /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
+		36D0A83E2742554B00ABD08E /* ImageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEntity.swift; sourceTree = "<group>"; };
 		36D0A843274255AA00ABD08E /* FirebaseStorageConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageConfigs.swift; sourceTree = "<group>"; };
 		36D0A844274255AA00ABD08E /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		36D0A84A274259CE00ABD08E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -162,9 +172,34 @@
 		36A0BC432742BCA700959996 /* Remote */ = {
 			isa = PBXGroup;
 			children = (
-				36A0BC442742BCBD00959996 /* SyncEvent.swift */,
 			);
 			path = Remote;
+			sourceTree = "<group>";
+		};
+		36A0BC4B274353FC00959996 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				36D0A83E2742554B00ABD08E /* ImageEntity.swift */,
+				36A0BC2F2742AD7E00959996 /* LimitData.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		36A0BC4D2743541B00959996 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				36A0BC502743564B00959996 /* ImageData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		36A0BC56274360DC00959996 /* DateTime */ = {
+			isa = PBXGroup;
+			children = (
+				36A0BC572743611000959996 /* DateTimeFormat.swift */,
+				36A0BC592743619800959996 /* DateTimeUtils.swift */,
+			);
+			path = DateTime;
 			sourceTree = "<group>";
 		};
 		36D0A7DD2742521300ABD08E = {
@@ -232,6 +267,7 @@
 		36D0A837274254E900ABD08E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				36A0BC56274360DC00959996 /* DateTime */,
 				36A0BC342742AE6800959996 /* Logger */,
 				36A0BC332742AE5A00959996 /* Extensions */,
 				36D0A8382742550400ABD08E /* Utils.swift */,
@@ -252,8 +288,8 @@
 		36D0A83D2742552300ABD08E /* Local */ = {
 			isa = PBXGroup;
 			children = (
-				36D0A83E2742554B00ABD08E /* ImageData.swift */,
-				36A0BC2F2742AD7E00959996 /* LimitData.swift */,
+				36A0BC4D2743541B00959996 /* Data */,
+				36A0BC4B274353FC00959996 /* Realm */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -263,6 +299,7 @@
 			children = (
 				36D0A8422742559200ABD08E /* Remote */,
 				36D0A8412742558800ABD08E /* Local */,
+				36A0BC4E274355EE00959996 /* Repository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -270,6 +307,8 @@
 		36D0A8412742558800ABD08E /* Local */ = {
 			isa = PBXGroup;
 			children = (
+				36A0BC4827434C6500959996 /* RealmManager.swift */,
+				36A0BC5427435F7300959996 /* StorageManager.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -466,19 +505,24 @@
 				36A0BC322742AE3600959996 /* String+.swift in Sources */,
 				36A0BC4727433BF900959996 /* FIRStorageReference+Rx.swift in Sources */,
 				36A0BC392742B03C00959996 /* GalleryViewModel.swift in Sources */,
-				36A0BC452742BCBD00959996 /* SyncEvent.swift in Sources */,
+				36A0BC5A2743619800959996 /* DateTimeUtils.swift in Sources */,
 				36D0A846274255AA00ABD08E /* FirebaseStorageManager.swift in Sources */,
 				36D0A83B2742550400ABD08E /* Logger.swift in Sources */,
+				36A0BC512743564B00959996 /* ImageData.swift in Sources */,
+				36A0BC4927434C6500959996 /* RealmManager.swift in Sources */,
 				36A0BC422742BC1300959996 /* FIRStorageObservableTask+Rx.swift in Sources */,
 				36A0BC302742AD7E00959996 /* LimitData.swift in Sources */,
+				36A0BC5527435F7300959996 /* StorageManager.swift in Sources */,
 				36D0A7EE2742521300ABD08E /* ViewController.swift in Sources */,
 				36D0A7EA2742521300ABD08E /* AppDelegate.swift in Sources */,
 				36A0BC3B2742B71900959996 /* Constant.swift in Sources */,
 				36D0A7EC2742521300ABD08E /* SceneDelegate.swift in Sources */,
+				36A0BC4F274355EE00959996 /* Repository.swift in Sources */,
 				36D0A83A2742550400ABD08E /* Utils.swift in Sources */,
 				36A0BC362742AE7B00959996 /* UIImage+.swift in Sources */,
 				36D0A845274255AA00ABD08E /* FirebaseStorageConfigs.swift in Sources */,
-				36D0A83F2742554B00ABD08E /* ImageData.swift in Sources */,
+				36A0BC582743611000959996 /* DateTimeFormat.swift in Sources */,
+				36D0A83F2742554B00ABD08E /* ImageEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

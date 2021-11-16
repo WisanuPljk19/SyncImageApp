@@ -16,15 +16,25 @@ protocol GalleryViewOutput {
 
 class GalleryViewModel {
     
+    var repository: Repository
+    
     var limitData: LimitData?
     var imageList: [ImageData]
     var imageListOffline: [ImageData]
     var galleryViewOutput: GalleryViewOutput?
     
+    
     init(_ output: GalleryViewOutput?) {
+        self.repository = Repository.shared
         self.imageList = []
         self.imageListOffline = []
         self.galleryViewOutput = output
+    }
+    
+    func saveImageData(imageData: ImageData){
+        if repository.saveImageData(imageData: imageData){
+            imageList.append(imageData)
+        }
     }
 
     func syncImageUp(){
@@ -45,10 +55,19 @@ class GalleryViewModel {
                                                   onSuccess: { id, remotePath in
                                                     imageData.remotePath = remotePath
                                                     imageData.syncDate = Date()
-                                                    // commit
-                                                    self.galleryViewOutput?.onSyncSuccess(id: id)
+                                                    if self.repository.updateImageData(imageData: imageData) {
+                                                        self.galleryViewOutput?.onSyncSuccess(id: id)
+                                                    }
                                                     self.uploadImage()
                                                   }, onFailure: galleryViewOutput?.onSyncFailure)
+    }
+    
+    func generateFileName(fileType: String) -> String{
+        guard let stringDate = DateTimeUtils.toString(from: Date()) else {
+            fatalError("cann't convert date to string")
+        }
+        
+        return "IMG_\(stringDate).\(fileType)"
     }
     
 }
