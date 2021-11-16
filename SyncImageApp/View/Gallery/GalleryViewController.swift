@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GalleryViewController.swift
 //  SyncImageApp
 //
 //  Created by Wisanu Paunglumjeak on 15/11/2564 BE.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class GalleryViewController: UIViewController {
     
     var picker = UIImagePickerController();
     var alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
@@ -70,7 +70,7 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: GalleryViewOutput {
+extension GalleryViewController: GalleryViewOutput {
     func onSuncAllSuccess() {
         Log.info("onSuncAllSuccess")
     }
@@ -90,20 +90,27 @@ extension ViewController: GalleryViewOutput {
 
 }
 
-extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+extension GalleryViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
-        /**
-         /Users/wisanupaunglumjeak/Library/Developer/CoreSimulator/Devices/729E1336-D65B-414F-80D3-F6BBB36E27B8/data/Containers/Data/Application/0B3893AF-A105-40B3-A89F-F5F40F8CFCBA/Documents/
-        */
+        
+        var fileType: String
+        if picker.sourceType == .photoLibrary,
+           let fileURL = info[.imageURL] as? URL {
+            fileType = fileURL.pathExtension
+        }else {
+            fileType = "jpeg"
+        }
+        
         guard let image = (info[.originalImage] as? UIImage)?
                 .recursiveReduce(expectSize: Constant.FILE_LIMIT_SIZE,
-                                 percentage: 0.8) else{
+                                 percentage: 0.8,
+                                 isOpaque: fileType.uppercased() == Constant.FILE_JPEG || fileType.uppercased() == Constant.FILE_HEIC) else{
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
-        let fileURL = info[.imageURL] as? URL
         
-        let imageName = viewModel.generateFileName(fileType: fileURL?.pathExtension ?? "jpeg")
+        
+        let imageName = viewModel.generateFileName(fileType: fileType)
         
         guard let localPath = StorageManager.shared.saveImage(imageName: imageName, image: image) else {
             return
@@ -112,7 +119,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         let imageData = ImageData(id: UUID().uuidString,
                                   name: imageName,
                                   localPath: localPath.absoluteString,
-                                  contentType: "image/\(fileURL?.pathExtension ?? "jpeg")")
+                                  contentType: "image/\(fileType)")
         
         viewModel.saveImageData(imageData: imageData)
         viewModel.syncImageUp()

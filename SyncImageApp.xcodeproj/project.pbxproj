@@ -22,9 +22,11 @@
 		36A0BC5527435F7300959996 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC5427435F7300959996 /* StorageManager.swift */; };
 		36A0BC582743611000959996 /* DateTimeFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC572743611000959996 /* DateTimeFormat.swift */; };
 		36A0BC5A2743619800959996 /* DateTimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC592743619800959996 /* DateTimeUtils.swift */; };
+		36A0BC5E2743835300959996 /* ImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC5D2743835300959996 /* ImageItem.swift */; };
+		36A0BC61274384EA00959996 /* UICircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC60274384EA00959996 /* UICircleView.swift */; };
 		36D0A7EA2742521300ABD08E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A7E92742521300ABD08E /* AppDelegate.swift */; };
 		36D0A7EC2742521300ABD08E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A7EB2742521300ABD08E /* SceneDelegate.swift */; };
-		36D0A7EE2742521300ABD08E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A7ED2742521300ABD08E /* ViewController.swift */; };
+		36D0A7EE2742521300ABD08E /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A7ED2742521300ABD08E /* GalleryViewController.swift */; };
 		36D0A7F12742521300ABD08E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36D0A7EF2742521300ABD08E /* Main.storyboard */; };
 		36D0A7F32742521600ABD08E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36D0A7F22742521600ABD08E /* Assets.xcassets */; };
 		36D0A7F62742521600ABD08E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36D0A7F42742521600ABD08E /* LaunchScreen.storyboard */; };
@@ -81,10 +83,12 @@
 		36A0BC5427435F7300959996 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		36A0BC572743611000959996 /* DateTimeFormat.swift */ = {isa = PBXFileReference; indentWidth = 5; lastKnownFileType = sourcecode.swift; path = DateTimeFormat.swift; sourceTree = "<group>"; };
 		36A0BC592743619800959996 /* DateTimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeUtils.swift; sourceTree = "<group>"; };
+		36A0BC5D2743835300959996 /* ImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItem.swift; sourceTree = "<group>"; };
+		36A0BC60274384EA00959996 /* UICircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICircleView.swift; sourceTree = "<group>"; };
 		36D0A7E62742521300ABD08E /* SyncImageApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SyncImageApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36D0A7E92742521300ABD08E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36D0A7EB2742521300ABD08E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		36D0A7ED2742521300ABD08E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		36D0A7ED2742521300ABD08E /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		36D0A7F02742521300ABD08E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		36D0A7F22742521600ABD08E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36D0A7F52742521600ABD08E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -164,7 +168,9 @@
 		36A0BC372742B02C00959996 /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
+				36D0A7ED2742521300ABD08E /* GalleryViewController.swift */,
 				36A0BC382742B03C00959996 /* GalleryViewModel.swift */,
+				36A0BC5D2743835300959996 /* ImageItem.swift */,
 			);
 			path = Gallery;
 			sourceTree = "<group>";
@@ -200,6 +206,14 @@
 				36A0BC592743619800959996 /* DateTimeUtils.swift */,
 			);
 			path = DateTime;
+			sourceTree = "<group>";
+		};
+		36A0BC5F274384CF00959996 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				36A0BC60274384EA00959996 /* UICircleView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		36D0A7DD2742521300ABD08E = {
@@ -259,7 +273,6 @@
 			isa = PBXGroup;
 			children = (
 				36A0BC372742B02C00959996 /* Gallery */,
-				36D0A7ED2742521300ABD08E /* ViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -267,6 +280,7 @@
 		36D0A837274254E900ABD08E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				36A0BC5F274384CF00959996 /* Components */,
 				36A0BC56274360DC00959996 /* DateTime */,
 				36A0BC342742AE6800959996 /* Logger */,
 				36A0BC332742AE5A00959996 /* Extensions */,
@@ -504,16 +518,18 @@
 			files = (
 				36A0BC322742AE3600959996 /* String+.swift in Sources */,
 				36A0BC4727433BF900959996 /* FIRStorageReference+Rx.swift in Sources */,
+				36A0BC61274384EA00959996 /* UICircleView.swift in Sources */,
 				36A0BC392742B03C00959996 /* GalleryViewModel.swift in Sources */,
 				36A0BC5A2743619800959996 /* DateTimeUtils.swift in Sources */,
 				36D0A846274255AA00ABD08E /* FirebaseStorageManager.swift in Sources */,
 				36D0A83B2742550400ABD08E /* Logger.swift in Sources */,
+				36A0BC5E2743835300959996 /* ImageItem.swift in Sources */,
 				36A0BC512743564B00959996 /* ImageData.swift in Sources */,
 				36A0BC4927434C6500959996 /* RealmManager.swift in Sources */,
 				36A0BC422742BC1300959996 /* FIRStorageObservableTask+Rx.swift in Sources */,
 				36A0BC302742AD7E00959996 /* LimitData.swift in Sources */,
 				36A0BC5527435F7300959996 /* StorageManager.swift in Sources */,
-				36D0A7EE2742521300ABD08E /* ViewController.swift in Sources */,
+				36D0A7EE2742521300ABD08E /* GalleryViewController.swift in Sources */,
 				36D0A7EA2742521300ABD08E /* AppDelegate.swift in Sources */,
 				36A0BC3B2742B71900959996 /* Constant.swift in Sources */,
 				36D0A7EC2742521300ABD08E /* SceneDelegate.swift in Sources */,

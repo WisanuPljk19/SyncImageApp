@@ -10,4 +10,7 @@ import Foundation
 class Constant {
     static let FILE_LIMIT_SIZE = 1_000_000
     static let DIR_IMAGE_BUCKET = "ImageBucket"
+    static let FILE_JPEG = "JPEG"
+    static let FILE_PNG = "PNG"
+    static let FILE_HEIC = "HEIC"
 }

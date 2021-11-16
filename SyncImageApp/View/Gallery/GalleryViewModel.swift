@@ -50,16 +50,16 @@ class GalleryViewModel {
         
         let imageData = imageListOffline.removeFirst()
         
-        FirebaseStorageManager.shared.uploadImage(imageData,
-                                                  onProcess: galleryViewOutput?.onSyncProgress,
-                                                  onSuccess: { id, remotePath in
-                                                    imageData.remotePath = remotePath
-                                                    imageData.syncDate = Date()
-                                                    if self.repository.updateImageData(imageData: imageData) {
-                                                        self.galleryViewOutput?.onSyncSuccess(id: id)
-                                                    }
-                                                    self.uploadImage()
-                                                  }, onFailure: galleryViewOutput?.onSyncFailure)
+        repository.uploadImage(imageData: imageData,
+                               onProcess: galleryViewOutput?.onSyncProgress,
+                               onSuccess: { id, remotePath in
+                                imageData.remotePath = remotePath
+                                imageData.syncDate = Date()
+                                if self.repository.updateImageData(imageData: imageData) {
+                                    self.galleryViewOutput?.onSyncSuccess(id: id)
+                                }
+                                self.uploadImage()
+                               }, onFailure: galleryViewOutput?.onSyncFailure)
     }
     
     func generateFileName(fileType: String) -> String{

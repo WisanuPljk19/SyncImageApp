@@ -10,7 +10,7 @@ import UIKit
 
 extension UIImage {
     
-    func reduce(percentage: CGFloat, isOpaque: Bool = true) -> UIImage? {
+    func reduce(percentage: CGFloat, isOpaque: Bool) -> UIImage? {
         let newSize = CGSize(width: size.width * percentage,
                             height: size.height * percentage)
         let format = imageRendererFormat
@@ -20,7 +20,7 @@ extension UIImage {
         }
     }
     
-    func recursiveReduce(expectSize: Int, percentage: CGFloat, isOpaque: Bool = true) -> UIImage?{
+    func recursiveReduce(expectSize: Int, percentage: CGFloat, isOpaque: Bool) -> UIImage?{
         guard let data = jpegData(compressionQuality: 1.0) else {
             Log.info("reduce failure: data is nil")
            return nil
@@ -32,7 +32,8 @@ extension UIImage {
         Log.info("image size: \(data.count)")
         return reduce(percentage: percentage, isOpaque: isOpaque)?
             .recursiveReduce(expectSize: expectSize,
-                             percentage: percentage)
+                             percentage: percentage,
+                             isOpaque: isOpaque)
     }
     
 }
