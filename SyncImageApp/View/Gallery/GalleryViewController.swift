@@ -96,7 +96,7 @@ class GalleryViewController: UIViewController {
     }
     
     @IBAction func sync(_ button: UIButton) {
-        viewModel.syncImageUp()
+        
     }
     
     @IBAction func addImage(_ button: UIButton){

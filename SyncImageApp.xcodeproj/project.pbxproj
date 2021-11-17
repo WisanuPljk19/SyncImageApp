@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3633C2672744F30400B91CF6 /* SyncImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3633C2662744F30400B91CF6 /* SyncImageManager.swift */; };
 		36A0BC302742AD7E00959996 /* LimitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC2F2742AD7E00959996 /* LimitData.swift */; };
 		36A0BC322742AE3600959996 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC312742AE3600959996 /* String+.swift */; };
 		36A0BC362742AE7B00959996 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC352742AE7B00959996 /* UIImage+.swift */; };
@@ -74,6 +75,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3633C2662744F30400B91CF6 /* SyncImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncImageManager.swift; sourceTree = "<group>"; };
 		36A0BC2F2742AD7E00959996 /* LimitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitData.swift; sourceTree = "<group>"; };
 		36A0BC312742AE3600959996 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		36A0BC352742AE7B00959996 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
@@ -154,6 +156,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3633C2652744E20F00B91CF6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				36A0BC5D2743835300959996 /* ImageItem.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		36A0BC332742AE5A00959996 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,9 +187,9 @@
 		36A0BC372742B02C00959996 /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
+				3633C2652744E20F00B91CF6 /* Cell */,
 				36D0A7ED2742521300ABD08E /* GalleryViewController.swift */,
 				36A0BC382742B03C00959996 /* GalleryViewModel.swift */,
-				36A0BC5D2743835300959996 /* ImageItem.swift */,
 			);
 			path = Gallery;
 			sourceTree = "<group>";
@@ -360,6 +370,7 @@
 			children = (
 				36D0A7E92742521300ABD08E /* AppDelegate.swift */,
 				36D0A7EB2742521300ABD08E /* SceneDelegate.swift */,
+				3633C2662744F30400B91CF6 /* SyncImageManager.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -538,6 +549,7 @@
 				36A0BC5A2743619800959996 /* DateTimeUtils.swift in Sources */,
 				36D0A846274255AA00ABD08E /* FirebaseStorageManager.swift in Sources */,
 				36D0A83B2742550400ABD08E /* Logger.swift in Sources */,
+				3633C2672744F30400B91CF6 /* SyncImageManager.swift in Sources */,
 				36A0BC5E2743835300959996 /* ImageItem.swift in Sources */,
 				36A0BC512743564B00959996 /* ImageData.swift in Sources */,
 				36A0BC4927434C6500959996 /* RealmManager.swift in Sources */,
