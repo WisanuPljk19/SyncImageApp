@@ -18,4 +18,23 @@ class LimitsViewModel {
         self.limitData = repository.getLimitData()
     }
     
+    func updateLimits(){
+        _ = repository.updateLimitData(limitData: self.limitData)
+    }
+    
+    func validateLimitData() -> (Bool, String?) {
+        if limitData.jpeg < 0 || limitData.png < 0 || limitData.heic < 0 {
+            //error less than zero
+            return (false, "All image type must be quantity greater more than or equal zero")
+        } else if summaryLimits() < 100 {
+            //error sum less than zero
+            return (false, "summary all type not below 100")
+        }
+        
+        return (true, nil)
+    }
+    
+    func summaryLimits() -> Int{
+        return limitData.jpeg + limitData.png + limitData.heic
+    }
 }

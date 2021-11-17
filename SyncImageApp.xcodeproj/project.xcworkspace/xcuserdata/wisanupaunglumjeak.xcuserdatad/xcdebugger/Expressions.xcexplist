@@ -66,6 +66,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "Repository.updateLimitData(limitData:):Repository.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in GalleryViewModel.getImageData():GalleryViewModel.swift">
          <PersistentStrings>
             <PersistentString
@@ -92,6 +95,22 @@
          <PersistentStrings>
             <PersistentString
                value = "info[.imageURL] as? URL">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LimitsViewModel.updateLimits():LimitsViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.limitData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Repository.getLimitData():Repository.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "realmManager.getLimitsEntity()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

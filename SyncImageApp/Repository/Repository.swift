@@ -71,9 +71,9 @@ final class Repository {
         return LimitData(limitEntity: realmManager.getLimitsEntity() ??
                             realmManager.saveLimitData(limitEntity: LimitEntity.initialLimit())!)
     }
-//    
-//    func updateLimitData(limitData: LimitData) -> Bool{
-//        return realmManager.updateLimitsEntity(jpeg: limitData.jpeg, png: limitData.png, heic: limitData.heic)
-//    }
+
+    func updateLimitData(limitData: LimitData) -> Bool{
+        return realmManager.updateLimitsEntity(jpeg: limitData.jpeg, png: limitData.png, heic: limitData.heic) != nil
+    }
     
 }

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class LimitsViewController: UIViewController {
     
@@ -14,6 +16,7 @@ class LimitsViewController: UIViewController {
     @IBOutlet var tfPng: UITextField!
     @IBOutlet var tfHeic: UITextField!
     
+    var disposeBag = DisposeBag()
     
     lazy var viewModel = {
         return LimitsViewModel()
@@ -22,6 +25,7 @@ class LimitsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupReactive()
     }
     
     private func setupView(){
@@ -33,7 +37,40 @@ class LimitsViewController: UIViewController {
         tfHeic.text = "\(viewModel.limitData.heic)"
     }
     
+    private func setupReactive(){
+        tfJpeg
+            .rx
+            .controlEvent(.editingChanged)
+            .withLatestFrom(tfJpeg.rx.text.orEmpty)
+            .subscribe(onNext: { text in
+                self.viewModel.limitData.jpeg = Int(text) ?? 0
+            }).disposed(by: disposeBag)
+        
+        tfPng
+            .rx
+            .controlEvent(.editingChanged)
+            .withLatestFrom(tfPng.rx.text.orEmpty)
+            .subscribe(onNext: { text in
+                self.viewModel.limitData.png = Int(text) ?? 0
+            }).disposed(by: disposeBag)
+        
+        tfHeic
+            .rx
+            .controlEvent(.editingChanged)
+            .withLatestFrom(tfHeic.rx.text.orEmpty)
+            .subscribe(onNext: { text in
+                self.viewModel.limitData.heic = Int(text) ?? 0
+            }).disposed(by: disposeBag)
+    }
+    
     @IBAction func savePress(_ sender: Any) {
+        let (isPass, message) = viewModel.validateLimitData()
+        guard isPass else {
+            Log.info("save limit invalidate: \(message!)")
+            return
+        }
+        viewModel.updateLimits()
+        self.dismiss(animated: true, completion: nil)
     }
     
     
