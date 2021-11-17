@@ -7,23 +7,36 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
+import RxReachability
+import Reachability
 
 final class SyncImageManager {
     
     static let shared = SyncImageManager()
-
-    private var disposeBag = DisposeBag()
     private var repository: Repository
+    
+    private var disposeBag = DisposeBag()
+    
     private var imageListOffline = [ImageData]()
     private var isProcessing = false
+    private let reachability: Reachability! = try? Reachability()
     
     private init() {
         self.repository = Repository.shared
+        try? reachability.startNotifier()
+        subscribeNetwork()
+    }
+    
+    func subscribeNetwork(){
+        reachability.rx.isReachable.subscribe(onNext: { isReachable in
+            Log.info("internet status: \(isReachable)")
+        }).disposed(by: disposeBag)
     }
     
     func sync(){
         getImageData()
-        uploadImage()
+//        uploadImage()
     }
     
     func getImageData(){
@@ -39,7 +52,7 @@ final class SyncImageManager {
                 break
             }
             if !self.isProcessing {
-                self.uploadImage()
+//                self.uploadImage()
             }
         }).disposed(by: disposeBag)
     }
@@ -52,14 +65,22 @@ final class SyncImageManager {
         }
         Log.info("start processing")
         isProcessing = true
-        let imageData = imageListOffline.removeFirst()
-
-        repository.uploadImage(imageData: imageData,
+        
+        repository.uploadImage(imageData: imageListOffline[0],
                                onSuccess: { id, remotePath in
+                                let imageData = self.imageListOffline.removeFirst()
                                 imageData.remotePath = remotePath
                                 imageData.syncDate = Date()
                                 _ = self.repository.updateImageData(imageData: imageData)
                                 self.uploadImage()
+                               },
+                               onFailure: { storageError in
+                                switch storageError {
+                                case .retryLimitExceeded:
+                                    Log.info("uploadImage failure cann't connect internet")
+                                default:
+                                    Log.error("uploadImage failure: \(storageError.debugDescription)")
+                                }
                                })
     }
     

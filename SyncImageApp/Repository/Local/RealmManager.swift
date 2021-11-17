@@ -25,6 +25,38 @@ final class RealmManager {
         }
     }
     
+    func getLimitsEntity() -> LimitEntity? {
+        return realm.objects(LimitEntity.self).first
+    }
+    
+    func saveLimitData(limitEntity: LimitEntity) -> LimitEntity?{
+        do {
+            try realm.write {
+                self.realm.add(limitEntity)
+            }
+            return limitEntity
+        } catch {
+            return nil
+        }
+    }
+    
+    func updateLimitsEntity(jpeg: Int, png: Int, heic: Int) -> LimitEntity? {
+        guard let limitEntity = realm.objects(LimitEntity.self).first else {
+            return nil
+        }
+        
+        do {
+            try realm.write{
+                limitEntity.jpeg = jpeg
+                limitEntity.png = png
+                limitEntity.heic = heic
+            }
+            return limitEntity
+        } catch {
+            return nil
+        }
+    }
+    
     func getImageEntityChangeset() -> Observable<(AnyRealmCollection<ImageEntity>, RealmChangeset?)>{
         Observable.changeset(from: realm.objects(ImageEntity.self))
     }
@@ -44,7 +76,6 @@ final class RealmManager {
             return nil
         }
     }
-        
         
     func updateImageEntity(id: String, syncDate: Date?, remotePath: String?) -> ImageEntity?{
         guard let imageEntity = realm.objects(ImageEntity.self).filter("id = %@", id).first else {

@@ -23,7 +23,8 @@ final class FirebaseStorageManager {
     }
     
     func uploadImage(_ imageData: ImageData,
-                     onSuccess:((String, String) -> Void)? = nil) {
+                     onSuccess:((String, String) -> Void)?,
+                     onFailure:((StorageErrorCode?) -> Void)?) {
         
         guard let localUrl = Utils.getDocumentDir()?.appendingPathComponent(imageData.localPath) else {
 //            onFailure?(imageData.id, "cann't convert localPath \(imageData.localPath) to URL")
@@ -46,6 +47,11 @@ final class FirebaseStorageManager {
             onSuccess?(imageData.id, snapshot.reference.fullPath)
         }
 
+        uploadTask.observe(.failure) { snapshot in
+            if let error = snapshot.error as NSError? {
+                onFailure?(StorageErrorCode(rawValue: error.code))
+            }
+        }
     }
     
     func subscribeUploadTask(onProcess: PublishSubject<(String, Float)>?,

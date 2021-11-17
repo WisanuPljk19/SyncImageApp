@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		3633C2672744F30400B91CF6 /* SyncImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3633C2662744F30400B91CF6 /* SyncImageManager.swift */; };
-		36A0BC302742AD7E00959996 /* LimitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC2F2742AD7E00959996 /* LimitData.swift */; };
+		3633C26D2744FD4600B91CF6 /* RxReachability in Frameworks */ = {isa = PBXBuildFile; productRef = 3633C26C2744FD4600B91CF6 /* RxReachability */; };
+		3633C26F274552D200B91CF6 /* LimitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3633C26E274552D200B91CF6 /* LimitData.swift */; };
+		3633C2722745570500B91CF6 /* LimitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3633C2712745570500B91CF6 /* LimitsViewController.swift */; };
+		3633C2742745572500B91CF6 /* LimitsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3633C2732745572500B91CF6 /* LimitsViewModel.swift */; };
+		36A0BC302742AD7E00959996 /* LimitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC2F2742AD7E00959996 /* LimitEntity.swift */; };
 		36A0BC322742AE3600959996 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC312742AE3600959996 /* String+.swift */; };
 		36A0BC362742AE7B00959996 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC352742AE7B00959996 /* UIImage+.swift */; };
 		36A0BC392742B03C00959996 /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC382742B03C00959996 /* GalleryViewModel.swift */; };
@@ -76,7 +80,10 @@
 
 /* Begin PBXFileReference section */
 		3633C2662744F30400B91CF6 /* SyncImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncImageManager.swift; sourceTree = "<group>"; };
-		36A0BC2F2742AD7E00959996 /* LimitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitData.swift; sourceTree = "<group>"; };
+		3633C26E274552D200B91CF6 /* LimitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitData.swift; sourceTree = "<group>"; };
+		3633C2712745570500B91CF6 /* LimitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitsViewController.swift; sourceTree = "<group>"; };
+		3633C2732745572500B91CF6 /* LimitsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitsViewModel.swift; sourceTree = "<group>"; };
+		36A0BC2F2742AD7E00959996 /* LimitEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitEntity.swift; sourceTree = "<group>"; };
 		36A0BC312742AE3600959996 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		36A0BC352742AE7B00959996 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		36A0BC382742B03C00959996 /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
@@ -125,6 +132,7 @@
 				36D0A81B274252FE00ABD08E /* FirebaseDatabase in Frameworks */,
 				36A0BC3E2742BB3100959996 /* RxCocoa in Frameworks */,
 				36A0BC6927440AE000959996 /* Kingfisher in Frameworks */,
+				3633C26D2744FD4600B91CF6 /* RxReachability in Frameworks */,
 				36D0A825274252FE00ABD08E /* FirebaseCrashlytics in Frameworks */,
 				36D0A827274252FE00ABD08E /* FirebaseStorage in Frameworks */,
 				36A0BC402742BB3100959996 /* RxSwift in Frameworks */,
@@ -162,6 +170,15 @@
 				36A0BC5D2743835300959996 /* ImageItem.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		3633C270274556E800B91CF6 /* Limits */ = {
+			isa = PBXGroup;
+			children = (
+				3633C2712745570500B91CF6 /* LimitsViewController.swift */,
+				3633C2732745572500B91CF6 /* LimitsViewModel.swift */,
+			);
+			path = Limits;
 			sourceTree = "<group>";
 		};
 		36A0BC332742AE5A00959996 /* Extensions */ = {
@@ -205,7 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				36D0A83E2742554B00ABD08E /* ImageEntity.swift */,
-				36A0BC2F2742AD7E00959996 /* LimitData.swift */,
+				36A0BC2F2742AD7E00959996 /* LimitEntity.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -214,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				36A0BC502743564B00959996 /* ImageData.swift */,
+				3633C26E274552D200B91CF6 /* LimitData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -291,6 +309,7 @@
 		36D0A836274254D600ABD08E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3633C270274556E800B91CF6 /* Limits */,
 				36A0BC372742B02C00959996 /* Gallery */,
 			);
 			path = View;
@@ -417,6 +436,7 @@
 				36A0BC3F2742BB3100959996 /* RxSwift */,
 				36A0BC6327439DC000959996 /* RxRealm */,
 				36A0BC6827440AE000959996 /* Kingfisher */,
+				3633C26C2744FD4600B91CF6 /* RxReachability */,
 			);
 			productName = SyncImageApp;
 			productReference = 36D0A7E62742521300ABD08E /* SyncImageApp.app */;
@@ -496,6 +516,7 @@
 				36A0BC3C2742BB3000959996 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				36A0BC6227439DC000959996 /* XCRemoteSwiftPackageReference "RxRealm" */,
 				36A0BC6727440AE000959996 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				3633C26B2744FD4600B91CF6 /* XCRemoteSwiftPackageReference "RxReachability" */,
 			);
 			productRefGroup = 36D0A7E72742521300ABD08E /* Products */;
 			projectDirPath = "";
@@ -543,9 +564,12 @@
 			files = (
 				36A0BC322742AE3600959996 /* String+.swift in Sources */,
 				36A0BC4727433BF900959996 /* FIRStorageReference+Rx.swift in Sources */,
+				3633C26F274552D200B91CF6 /* LimitData.swift in Sources */,
 				36A0BC61274384EA00959996 /* UICircleView.swift in Sources */,
 				36A0BC6B27449C2F00959996 /* RealmChangesetEnums.swift in Sources */,
 				36A0BC392742B03C00959996 /* GalleryViewModel.swift in Sources */,
+				3633C2742745572500B91CF6 /* LimitsViewModel.swift in Sources */,
+				3633C2722745570500B91CF6 /* LimitsViewController.swift in Sources */,
 				36A0BC5A2743619800959996 /* DateTimeUtils.swift in Sources */,
 				36D0A846274255AA00ABD08E /* FirebaseStorageManager.swift in Sources */,
 				36D0A83B2742550400ABD08E /* Logger.swift in Sources */,
@@ -554,7 +578,7 @@
 				36A0BC512743564B00959996 /* ImageData.swift in Sources */,
 				36A0BC4927434C6500959996 /* RealmManager.swift in Sources */,
 				36A0BC422742BC1300959996 /* FIRStorageObservableTask+Rx.swift in Sources */,
-				36A0BC302742AD7E00959996 /* LimitData.swift in Sources */,
+				36A0BC302742AD7E00959996 /* LimitEntity.swift in Sources */,
 				36A0BC662743FD6400959996 /* Realm+.swift in Sources */,
 				36A0BC5527435F7300959996 /* StorageManager.swift in Sources */,
 				36D0A7EE2742521300ABD08E /* GalleryViewController.swift in Sources */,
@@ -672,7 +696,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -727,7 +751,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -744,7 +768,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8V2SYTBM4P;
 				INFOPLIST_FILE = "$(SRCROOT)/SyncImageApp/Configs/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -764,7 +790,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8V2SYTBM4P;
 				INFOPLIST_FILE = "$(SRCROOT)/SyncImageApp/Configs/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -899,6 +927,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3633C26B2744FD4600B91CF6 /* XCRemoteSwiftPackageReference "RxReachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxReachability.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
 		36A0BC3C2742BB3000959996 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -950,6 +986,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3633C26C2744FD4600B91CF6 /* RxReachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3633C26B2744FD4600B91CF6 /* XCRemoteSwiftPackageReference "RxReachability" */;
+			productName = RxReachability;
+		};
 		36A0BC3D2742BB3100959996 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 36A0BC3C2742BB3000959996 /* XCRemoteSwiftPackageReference "RxSwift" */;

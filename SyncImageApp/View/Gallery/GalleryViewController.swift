@@ -13,6 +13,8 @@ import RxRealm
 class GalleryViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var btnAdd: UIButton!
+    @IBOutlet var btnSetting: UIButton!
     
     var picker = UIImagePickerController();
     var alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
@@ -35,6 +37,7 @@ class GalleryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -43,6 +46,14 @@ class GalleryViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         setupReactive()
+    }
+    
+    private func setupView(){
+        btnAdd.setImage(#imageLiteral(resourceName: "ic_add").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnAdd.tintColor = .white
+        
+        btnSetting.setImage(#imageLiteral(resourceName: "ic_setting").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnSetting.tintColor = .white
     }
     
     private func setupReactive(){
@@ -129,38 +140,34 @@ extension GalleryViewController: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         
-        DispatchQueue.main.async {
-            
-            var fileType: String
-            if picker.sourceType == .photoLibrary,
-               let fileURL = info[.imageURL] as? URL {
-                fileType = fileURL.pathExtension
-            }else {
-                fileType = "jpeg"
-            }
-            
-            guard let image = (info[.originalImage] as? UIImage)?
-                    .recursiveReduce(expectSize: Constant.FILE_LIMIT_SIZE,
-                                     percentage: 0.8,
-                                     isOpaque: fileType.uppercased() == Constant.FILE_JPEG || fileType.uppercased() == Constant.FILE_HEIC) else{
-                fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
-            }
-            
+        var fileType: String
+        if picker.sourceType == .photoLibrary,
+           let fileURL = info[.imageURL] as? URL {
+            fileType = fileURL.pathExtension
+        }else {
+            fileType = "jpeg"
+        }
+        
+        guard let image = info[.originalImage] as? UIImage else{
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+
+        image.recursiveReduce(expectSize: Constant.FILE_LIMIT_SIZE,
+                              percentage: 0.8,
+                              isOpaque: fileType.uppercased() == Constant.FILE_JPEG || fileType.uppercased() == Constant.FILE_HEIC) { isSuccess, imageReduce in
             let imageName = self.viewModel.generateFileName(fileType: fileType)
-            
             guard let localPath = StorageManager.shared.saveImage(imageName: imageName, image: image) else {
                 return
             }
-            
             let imageData = ImageData(id: UUID().uuidString,
-                                      name: imageName,
-                                      localPath: localPath,
-                                      contentType: "image/\(fileType)")
-            
-            self.viewModel.saveImageData(imageData: imageData)
+                                  name: imageName,
+                                  localPath: localPath,
+                                  contentType: "image/\(fileType)")
+            DispatchQueue.main.async {
+                self.viewModel.saveImageData(imageData: imageData)
+            }
         }
     }
-
 }
 
 extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataSource {

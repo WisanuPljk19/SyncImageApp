@@ -20,17 +20,16 @@ class GalleryViewModel {
     
     var imageDataDisposeable: Disposable?
     
-    var repository: Repository
+    let repository: Repository
+    let galleryViewOutput: GalleryViewOutput?
     
-    var limitData: LimitData?
+    var limitData: LimitEntity?
     var imageList = [ImageData]()
-//    var imageListOffline = [ImageData]()
-    var galleryViewOutput: GalleryViewOutput?
+
     
     
     init(_ output: GalleryViewOutput?) {
         self.repository = Repository.shared
-//        self.imageListOffline = []
         self.galleryViewOutput = output
     }
     
@@ -39,7 +38,6 @@ class GalleryViewModel {
             switch changeset {
             case .initial:
                 self.imageList.append(contentsOf: imageDataList)
-//                self.imageListOffline = []
                 self.galleryViewOutput?.onInitialList.onNext(imageDataList)
             case .insert:
                 indexs.forEach { index in
