@@ -7,6 +7,8 @@
 
 import Foundation
 import RealmSwift
+import RxRealm
+import RxSwift
 
 final class RealmManager {
     
@@ -23,9 +25,9 @@ final class RealmManager {
         }
     }
     
-//    func getImageEntityObjects() -> Results<ImageEntity>{
-//        return realm.objects(ImageEntity.self)
-//    }
+    func getImageEntityChangeset() -> Observable<(AnyRealmCollection<ImageEntity>, RealmChangeset?)>{
+        Observable.changeset(from: realm.objects(ImageEntity.self))
+    }
     
     func getImageEntities(isSync: Bool?) -> [ImageEntity] {
         return realm.objects(ImageEntity.self).toList(of: ImageEntity.self)

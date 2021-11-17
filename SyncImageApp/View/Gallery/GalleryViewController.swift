@@ -6,7 +6,9 @@
 //
 
 import UIKit
+import RxCocoa
 import RxSwift
+import RxRealm
 
 class GalleryViewController: UIViewController {
     
@@ -15,11 +17,17 @@ class GalleryViewController: UIViewController {
     var picker = UIImagePickerController();
     var alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
     
+    var onInitialList = PublishSubject<[ImageData]>()
+    var onInsertList = PublishSubject<[Int]>()
+    var onUpdateList = PublishSubject<[Int]>()
     var onProcess = PublishSubject<(String, Float)>()
     var onSuccess = PublishSubject<String>()
     
     lazy var viewModel = {
-        return GalleryViewModel(GalleryViewOutput.init(onProcess: onProcess,
+        return GalleryViewModel(GalleryViewOutput.init(onInitialList: onInitialList,
+                                                       onInsertList: onInsertList,
+                                                       onUpdateList: onUpdateList,
+                                                       onProcess: onProcess,
                                                        onSuccess: onSuccess))
     }()
     
@@ -30,7 +38,7 @@ class GalleryViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        viewModel.unsubscribeTask()
+        viewModel.unsubscribe()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,6 +46,19 @@ class GalleryViewController: UIViewController {
     }
     
     private func setupReactive(){
+        
+        onInitialList.asObservable().subscribe(onNext: { _ in
+            self.collectionView.reloadSections([0])
+        }).disposed(by: disposeBag)
+        
+        onInsertList.asObservable().subscribe(onNext: { indexs in
+            self.collectionView.insertItems(at: indexs.map{ IndexPath(item:$0, section: 0) })
+        }).disposed(by: disposeBag)
+        
+        onUpdateList.asObservable().subscribe(onNext: { indexs in
+            self.collectionView.reloadItems(at: indexs.map{ IndexPath(item: $0, section: 0) })
+        }).disposed(by: disposeBag)
+        
         onSuccess.asObservable().subscribe(onNext: { id in
             Log.info("onSuccess: \(id)")
         }).disposed(by: disposeBag)
@@ -46,7 +67,7 @@ class GalleryViewController: UIViewController {
             print("onSyncProgress: \(id), \(percentComplete)")
         }).disposed(by: disposeBag)
         
-        viewModel.subscribeTask()
+        viewModel.subscribe()
     }
     
     func openCamera(){
@@ -72,6 +93,10 @@ class GalleryViewController: UIViewController {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func sync(_ button: UIButton) {
+        viewModel.syncImageUp()
     }
     
     @IBAction func addImage(_ button: UIButton){
@@ -133,8 +158,6 @@ extension GalleryViewController: UIImagePickerControllerDelegate, UINavigationCo
                                       contentType: "image/\(fileType)")
             
             self.viewModel.saveImageData(imageData: imageData)
-            self.collectionView.insertItems(at: [IndexPath(item: self.viewModel.imageList.count - 1,
-                                                      section: 0)])
         }
     }
 
@@ -144,10 +167,10 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.viewModel.imageList.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageItem", for: indexPath) as! ImageItem
-        cell.setItem(imageData: self.viewModel.imageList[indexPath.item])
+        cell.setItem(imageData: self.viewModel.imageList[indexPath.row])
         return cell
     }
 }

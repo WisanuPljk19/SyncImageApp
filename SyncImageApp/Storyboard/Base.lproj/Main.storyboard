@@ -44,6 +44,9 @@
                                     <constraint firstAttribute="width" secondItem="Lug-gh-kFE" secondAttribute="height" multiplier="640:512" id="p0D-sE-Qey"/>
                                 </constraints>
                                 <state key="normal" image="ic_upload"/>
+                                <connections>
+                                    <action selector="sync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T0Q-6O-70H"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KaI-yM-MPA">
                                 <rect key="frame" x="234" y="76" width="30" height="24"/>
@@ -113,14 +116,15 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
+                                            <outlet property="icSync" destination="oNn-PE-xkA" id="wCm-Rk-g45"/>
                                             <outlet property="imageView" destination="IUI-jf-t9t" id="gvL-7G-d6Y"/>
                                             <outlet property="lbFileType" destination="BdU-oH-j2Q" id="rVp-gZ-Pma"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="q9X-1W-hYy"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="DVE-iN-fkZ"/>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="OR4-UJ-1bY"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="QDV-JE-IEP"/>
                                 </connections>
                             </collectionView>
                         </subviews>

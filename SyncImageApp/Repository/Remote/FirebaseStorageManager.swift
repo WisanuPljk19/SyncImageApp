@@ -25,7 +25,7 @@ final class FirebaseStorageManager {
     func uploadImage(_ imageData: ImageData,
                      onSuccess:((String, String) -> Void)? = nil) {
         
-        guard let localUrl = imageData.localPath.toUrl else {
+        guard let localUrl = Utils.getDocumentDir()?.appendingPathComponent(imageData.localPath) else {
 //            onFailure?(imageData.id, "cann't convert localPath \(imageData.localPath) to URL")
             return
         }

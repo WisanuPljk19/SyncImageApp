@@ -3,10 +3,24 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "GalleryViewModel.saveImageData(imageData:):GalleryViewModel.swift">
+      </ContextState>
+      <ContextState
          contextName = "GalleryViewModel.subscribeTask():GalleryViewModel.swift">
          <PersistentStrings>
             <PersistentString
                value = "galleryViewOutput?.onProcess">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in Repository.getImageData():Repository.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "changeset?.inserted[0]">
+            </PersistentString>
+            <PersistentString
+               value = "imageEntities.first?.id">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -41,7 +55,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in FirebaseStorageManager.subscribeUploadTask(onProcess:onSuccess:):FirebaseStorageManager.swift">
+         contextName = "closure #1 in GalleryViewModel.getImageData():GalleryViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.imageList">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "ImageItem.setItem(imageData:):ImageItem.swift">
@@ -52,12 +71,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in FirebaseStorageManager.subscribeUploadTask(onProcess:onSuccess:):FirebaseStorageManager.swift">
+      </ContextState>
+      <ContextState
          contextName = "ViewController.imagePickerController(_:didFinishPickingMediaWithInfo:):ViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "info[.imageURL] as? URL">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in GalleryViewController.setupReactive():GalleryViewController.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

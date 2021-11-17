@@ -27,6 +27,7 @@
 		36A0BC6427439DC000959996 /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = 36A0BC6327439DC000959996 /* RxRealm */; };
 		36A0BC662743FD6400959996 /* Realm+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC652743FD6400959996 /* Realm+.swift */; };
 		36A0BC6927440AE000959996 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 36A0BC6827440AE000959996 /* Kingfisher */; };
+		36A0BC6B27449C2F00959996 /* RealmChangesetEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC6A27449C2F00959996 /* RealmChangesetEnums.swift */; };
 		36D0A7EA2742521300ABD08E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A7E92742521300ABD08E /* AppDelegate.swift */; };
 		36D0A7EC2742521300ABD08E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A7EB2742521300ABD08E /* SceneDelegate.swift */; };
 		36D0A7EE2742521300ABD08E /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0A7ED2742521300ABD08E /* GalleryViewController.swift */; };
@@ -89,6 +90,7 @@
 		36A0BC5D2743835300959996 /* ImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItem.swift; sourceTree = "<group>"; };
 		36A0BC60274384EA00959996 /* UICircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICircleView.swift; sourceTree = "<group>"; };
 		36A0BC652743FD6400959996 /* Realm+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+.swift"; sourceTree = "<group>"; };
+		36A0BC6A27449C2F00959996 /* RealmChangesetEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmChangesetEnums.swift; sourceTree = "<group>"; };
 		36D0A7E62742521300ABD08E /* SyncImageApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SyncImageApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36D0A7E92742521300ABD08E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36D0A7EB2742521300ABD08E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				36A0BC332742AE5A00959996 /* Extensions */,
 				36D0A8382742550400ABD08E /* Utils.swift */,
 				36A0BC3A2742B71900959996 /* Constant.swift */,
+				36A0BC6A27449C2F00959996 /* RealmChangesetEnums.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				36A0BC322742AE3600959996 /* String+.swift in Sources */,
 				36A0BC4727433BF900959996 /* FIRStorageReference+Rx.swift in Sources */,
 				36A0BC61274384EA00959996 /* UICircleView.swift in Sources */,
+				36A0BC6B27449C2F00959996 /* RealmChangesetEnums.swift in Sources */,
 				36A0BC392742B03C00959996 /* GalleryViewModel.swift in Sources */,
 				36A0BC5A2743619800959996 /* DateTimeUtils.swift in Sources */,
 				36D0A846274255AA00ABD08E /* FirebaseStorageManager.swift in Sources */,

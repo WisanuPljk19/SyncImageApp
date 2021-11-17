@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import RxRealm
 
 final class Repository {
     
@@ -18,6 +19,28 @@ final class Repository {
     private init() {
         self.realmManager = RealmManager.shared
         self.remoteStorageManager = FirebaseStorageManager.shared
+    }
+    
+    func getImageData() -> Observable<(RealmChangesetEnums, [ImageData], [Int])>{
+        realmManager.getImageEntityChangeset().map { imageEntities, changeset in
+            let changesetEnum = RealmChangesetEnums.getEnumsFrom(changeset)
+            var indexChange:[Int] {
+                switch changesetEnum {
+                case .initial:
+                    return []
+                case .delete:
+                    return changeset?.deleted ?? []
+                case .update:
+                    return changeset?.updated ?? []
+                case .insert:
+                    return changeset?.inserted ?? []
+                }
+            }
+            return (changesetEnum,
+                    imageEntities.toArray().map{ ImageData.buildImageDataFrom(imageEntity: $0)},
+                    indexChange
+            )
+        }
     }
     
     func getImageEntity(isSync: Bool? = nil) -> [ImageData] {

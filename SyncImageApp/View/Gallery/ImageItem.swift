@@ -12,6 +12,7 @@ class ImageItem: UICollectionViewCell {
     
     @IBOutlet var lbFileType: UILabel!
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var icSync: UICustomView!
     
     func setItem(imageData: ImageData) {
         if let url = Utils.getDocumentDir()?.appendingPathComponent(imageData.localPath) {
@@ -24,6 +25,7 @@ class ImageItem: UICollectionViewCell {
         }else {
             self.imageView.image = #imageLiteral(resourceName: "ic_image")
         }
+        icSync.isHidden = imageData.syncDate != nil
         lbFileType.text = imageData.contentType
     }
     
