@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		36319BD42745F611007AA92A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 36319BD32745F611007AA92A /* Lottie */; };
 		36319BD72745F74D007AA92A /* lottie-upload.json in Resources */ = {isa = PBXBuildFile; fileRef = 36319BD62745F74D007AA92A /* lottie-upload.json */; };
+		36319BDB27460C0F007AA92A /* lottie-offline.json in Resources */ = {isa = PBXBuildFile; fileRef = 36319BDA27460C0F007AA92A /* lottie-offline.json */; };
 		3633C2672744F30400B91CF6 /* SyncImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3633C2662744F30400B91CF6 /* SyncImageManager.swift */; };
 		3633C26D2744FD4600B91CF6 /* RxReachability in Frameworks */ = {isa = PBXBuildFile; productRef = 3633C26C2744FD4600B91CF6 /* RxReachability */; };
 		3633C26F274552D200B91CF6 /* LimitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3633C26E274552D200B91CF6 /* LimitData.swift */; };
@@ -82,6 +83,7 @@
 
 /* Begin PBXFileReference section */
 		36319BD62745F74D007AA92A /* lottie-upload.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-upload.json"; sourceTree = "<group>"; };
+		36319BDA27460C0F007AA92A /* lottie-offline.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-offline.json"; sourceTree = "<group>"; };
 		3633C2662744F30400B91CF6 /* SyncImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncImageManager.swift; sourceTree = "<group>"; };
 		3633C26E274552D200B91CF6 /* LimitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitData.swift; sourceTree = "<group>"; };
 		3633C2712745570500B91CF6 /* LimitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitsViewController.swift; sourceTree = "<group>"; };
@@ -171,9 +173,18 @@
 		36319BD52745F73E007AA92A /* Animation */ = {
 			isa = PBXGroup;
 			children = (
+				36319BDA27460C0F007AA92A /* lottie-offline.json */,
 				36319BD62745F74D007AA92A /* lottie-upload.json */,
 			);
 			path = Animation;
+			sourceTree = "<group>";
+		};
+		36319BDC27460CE4007AA92A /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				3633C2662744F30400B91CF6 /* SyncImageManager.swift */,
+			);
+			path = Sync;
 			sourceTree = "<group>";
 		};
 		3633C2652744E20F00B91CF6 /* Cell */ = {
@@ -363,6 +374,7 @@
 		36D0A8402742558100ABD08E /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				36319BDC27460CE4007AA92A /* Sync */,
 				36D0A8422742559200ABD08E /* Remote */,
 				36D0A8412742558800ABD08E /* Local */,
 				36A0BC4E274355EE00959996 /* Repository.swift */,
@@ -402,7 +414,6 @@
 			children = (
 				36D0A7E92742521300ABD08E /* AppDelegate.swift */,
 				36D0A7EB2742521300ABD08E /* SceneDelegate.swift */,
-				3633C2662744F30400B91CF6 /* SyncImageManager.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -553,6 +564,7 @@
 				36D0A7F62742521600ABD08E /* LaunchScreen.storyboard in Resources */,
 				36D0A84B274259CE00ABD08E /* GoogleService-Info.plist in Resources */,
 				36D0A7F32742521600ABD08E /* Assets.xcassets in Resources */,
+				36319BDB27460C0F007AA92A /* lottie-offline.json in Resources */,
 				36D0A7F12742521300ABD08E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

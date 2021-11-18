@@ -23,7 +23,7 @@ class GalleryViewController: UIViewController {
     var picker = UIImagePickerController();
     var alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
     
-    var onUploading = PublishSubject<Bool>()
+    var onSyncStatusChange = PublishSubject<SyncStatus>()
     var onInitialList = PublishSubject<[ImageData]>()
     var onInsertList = PublishSubject<[Int]>()
     var onUpdateList = PublishSubject<[Int]>()
@@ -31,7 +31,7 @@ class GalleryViewController: UIViewController {
     var onSuccess = PublishSubject<String>()
     
     lazy var viewModel = {
-        return GalleryViewModel(GalleryViewOutput.init(onUploading: onUploading,
+        return GalleryViewModel(GalleryViewOutput.init(onSyncStatusChange: onSyncStatusChange,
                                                        onInitialList: onInitialList,
                                                        onInsertList: onInsertList,
                                                        onUpdateList: onUpdateList,
@@ -58,7 +58,7 @@ class GalleryViewController: UIViewController {
     }
     
     private func setupAnimation(){
-        animationView.animation = Animation.named("lottie-upload")
+//        animationView.animation = Animation.named("lottie-upload")
         animationView.frame = viewUploading.bounds
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
@@ -77,8 +77,17 @@ class GalleryViewController: UIViewController {
     
     private func setupReactive(){
         
-        onUploading.subscribe(onNext: { isUploading in
-            self.controlUploadingAnimatin(isUploading: isUploading)
+        onSyncStatusChange.subscribe(onNext: { syncStauts in
+            switch syncStauts {
+            case .uploading:
+                self.animationView.animation = Animation.named("lottie-upload")
+            case .waitNetwork:
+                self.animationView.animation = Animation.named("lottie-offline")
+            case .done:
+                break
+            }
+
+            self.controlAnimatin(isShow: syncStauts != .done)
         }).disposed(by: disposeBag)
         
         onInitialList.asObservable().subscribe(onNext: { _ in
@@ -149,11 +158,11 @@ class GalleryViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
-    private func controlUploadingAnimatin(isUploading: Bool) {
+    private func controlAnimatin(isShow: Bool) {
         UIView.animate(withDuration: 0.25, animations: {
-            self.viewUploading.alpha = isUploading ? 1 : 0
+            self.viewUploading.alpha = isShow ? 1 : 0
         }, completion: { isSuccess in
-            if isUploading {
+            if isShow {
                 self.animationView.play()
             }else {
                 self.animationView.stop()

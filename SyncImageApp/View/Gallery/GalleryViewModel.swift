@@ -11,7 +11,7 @@ import RxSwift
 import RxRelay
 
 struct GalleryViewOutput {
-    var onUploading: PublishSubject<Bool>
+    var onSyncStatusChange: PublishSubject<SyncStatus>
     var onInitialList: PublishSubject<[ImageData]>
     var onInsertList: PublishSubject<[Int]>
     var onUpdateList: PublishSubject<[Int]>
@@ -69,8 +69,8 @@ class GalleryViewModel {
     }
     
     func subscribe(){
-        if let isUploading = galleryViewOutput?.onUploading {
-            uploadingDisposeable = syncImageManager.processingSubject.bind(to: isUploading)
+        if let onSyncStatusChange = galleryViewOutput?.onSyncStatusChange {
+            uploadingDisposeable = syncImageManager.syncStatusSubject.bind(to: onSyncStatusChange)
         }
         getImageData()
         repository.subscribeUploadTask(onProcess: galleryViewOutput?.onProcess, onSuccess: galleryViewOutput?.onSuccess)
