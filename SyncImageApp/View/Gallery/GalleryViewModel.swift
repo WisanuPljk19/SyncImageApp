@@ -12,23 +12,23 @@ import RxRelay
 
 struct GalleryViewOutput {
     var onSyncStatusChange: PublishSubject<SyncStatus>
+    var onGetLimitData: PublishSubject<LimitData>
     var onInitialList: PublishSubject<[ImageData]>
     var onInsertList: PublishSubject<[Int]>
     var onUpdateList: PublishSubject<[Int]>
-    var onProcess: PublishSubject<(String, Float)>
-    var onSuccess: PublishSubject<String>
 }
 
 class GalleryViewModel {
     
     var imageDataDisposeable: Disposable?
+    var limitDataDisposeable: Disposable?
     var uploadingDisposeable: Disposable?
     
     let syncImageManager: SyncImageManager
     let repository: Repository
     let galleryViewOutput: GalleryViewOutput?
     
-    var limitData: LimitEntity?
+    var limitData: LimitData!
     var imageList = [ImageData]()
 
     
@@ -39,7 +39,14 @@ class GalleryViewModel {
         self.galleryViewOutput = output
     }
     
-    func getImageData(){
+    func subscribeLimitData(){
+        limitDataDisposeable = repository.subscribeLimitData().subscribe(onNext: { limitData in
+            self.limitData = limitData
+            self.galleryViewOutput?.onGetLimitData.onNext(limitData)
+        })
+    }
+    
+    func subscribeImageData(){
         imageDataDisposeable = repository.getImageData().subscribe(onNext: { changeset, imageDataList, indexs in
             switch changeset {
             case .initial:
@@ -72,14 +79,14 @@ class GalleryViewModel {
         if let onSyncStatusChange = galleryViewOutput?.onSyncStatusChange {
             uploadingDisposeable = syncImageManager.syncStatusSubject.bind(to: onSyncStatusChange)
         }
-        getImageData()
-        repository.subscribeUploadTask(onProcess: galleryViewOutput?.onProcess, onSuccess: galleryViewOutput?.onSuccess)
+        subscribeLimitData()
+        subscribeImageData()
     }
     
     func unsubscribe(){
+        limitDataDisposeable?.dispose()
         uploadingDisposeable?.dispose()
         imageDataDisposeable?.dispose()
-        repository.unsubscribeUploadTask()
     }
     
     func generateFileName(fileType: String) -> String{
@@ -90,4 +97,22 @@ class GalleryViewModel {
         return "IMG_\(stringDate).\(fileType)"
     }
     
+    func calLimitCount(iamgeType: String) -> Int{
+        return imageList.filter{ $0.fileType.uppercased() == iamgeType.uppercased() && $0.syncDate == nil }.count
+    }
+
+    func validateLimitCount(imageType: String) -> Bool{
+        var limit: Int
+        switch imageType.uppercased(){
+        case Constant.FILE_JPEG:
+            limit = limitData.jpeg
+        case Constant.FILE_PNG:
+            limit = limitData.png
+        case Constant.FILE_HEIC:
+            limit = limitData.heic
+        default:
+            fatalError("invalid image type")
+        }
+        return calLimitCount(iamgeType: imageType) - limit < 0
+    }
 }

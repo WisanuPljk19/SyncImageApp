@@ -58,18 +58,20 @@ final class Repository {
         remoteStorageManager.uploadImage(imageData, onSuccess: onSuccessHandler, onFailure: onFailureHandler)
     }
     
-    func subscribeUploadTask(onProcess onProcessHandler: PublishSubject<(String, Float)>?,
-                             onSuccess onSuccessHandler: PublishSubject<String>?){
-        remoteStorageManager.subscribeUploadTask(onProcess: onProcessHandler, onSuccess: onSuccessHandler)
+    func getLimitData() -> LimitData {
+        LimitData(limitEntity: realmManager.getLimitsEntity() ??
+                  realmManager.saveLimitData(limitEntity: LimitEntity.initialLimit())!)
     }
     
-    func unsubscribeUploadTask(){
-        remoteStorageManager.unsubscribeUploadTask()
-    }
-    
-    func getLimitData() -> LimitData{
-        return LimitData(limitEntity: realmManager.getLimitsEntity() ??
-                            realmManager.saveLimitData(limitEntity: LimitEntity.initialLimit())!)
+    func subscribeLimitData() -> Observable<LimitData>{
+        if realmManager.getLimitsEntity() == nil {
+            _ = realmManager.saveLimitData(limitEntity: LimitEntity.initialLimit())
+        }
+        return realmManager
+            .getLimitsEntityChangeset()
+            .map { limitEntity, changeset in
+                LimitData.init(limitEntity: limitEntity.first!)
+            }
     }
 
     func updateLimitData(limitData: LimitData) -> Bool{

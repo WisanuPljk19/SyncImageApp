@@ -15,8 +15,6 @@ final class FirebaseStorageManager {
     
     private var _storageRef: StorageReference
     private var idOnUploading: String?
-    private var observProcess: PublishSubject<(String, Float)>?
-    private var observSuccess: PublishSubject<String>?
     
     private init(){
         _storageRef = Storage.storage().reference().child(FirebaseStorageConfigs.CHILD_REF_PATH)
@@ -27,7 +25,6 @@ final class FirebaseStorageManager {
                      onFailure:((StorageErrorCode?) -> Void)?) {
         
         guard let localUrl = Utils.getDocumentDir()?.appendingPathComponent(imageData.localPath) else {
-//            onFailure?(imageData.id, "cann't convert localPath \(imageData.localPath) to URL")
             return
         }
         idOnUploading = imageData.id
@@ -35,15 +32,8 @@ final class FirebaseStorageManager {
             .child(localUrl.lastPathComponent)
             .putFile(from: localUrl,
                      metadata: buildStorageMetadata(fileType: imageData.fileType))
-
-        uploadTask.observe(.progress) { snapshot in
-            let percentComplete = Utils.calculatePercentComplete(complete: Float(snapshot.progress!.completedUnitCount),
-                                                                 total: Float(snapshot.progress!.totalUnitCount))
-            self.observProcess?.onNext((imageData.id, percentComplete))
-        }
         
         uploadTask.observe(.success) { snapshot in
-            self.observSuccess?.onNext(imageData.id)
             onSuccess?(imageData.id, snapshot.reference.fullPath)
         }
 
@@ -52,17 +42,6 @@ final class FirebaseStorageManager {
                 onFailure?(StorageErrorCode(rawValue: error.code))
             }
         }
-    }
-    
-    func subscribeUploadTask(onProcess: PublishSubject<(String, Float)>?,
-                          onSuccess: PublishSubject<String>?) {
-        self.observProcess = onProcess
-        self.observSuccess = onSuccess
-    }
-    
-    func unsubscribeUploadTask(){
-        self.observProcess = nil
-        self.observSuccess = nil
     }
 }
 

@@ -8,6 +8,25 @@
 import UIKit
 
 @IBDesignable final class UICustomView: UIView {
+    
+    @IBInspectable var borderColor: UIColor {
+        set {
+            layer.borderColor = newValue.cgColor
+        }
+        get {
+            return UIColor(cgColor: layer.borderColor!)
+        }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat {
+        set {
+            clipsToBounds = true
+            layer.borderWidth = newValue
+        }
+        get {
+            return layer.borderWidth
+        }
+    }
 
     @IBInspectable var cornerRadius: CGFloat {
         set {

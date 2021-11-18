@@ -29,6 +29,10 @@ final class RealmManager {
         return realm.objects(LimitEntity.self).first
     }
     
+    func getLimitsEntityChangeset() -> Observable<(AnyRealmCollection<LimitEntity>, RealmChangeset?)> {
+        Observable.changeset(from: realm.objects(LimitEntity.self))
+    }
+    
     func saveLimitData(limitEntity: LimitEntity) -> LimitEntity?{
         do {
             try realm.write {

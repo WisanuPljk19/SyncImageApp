@@ -17,6 +17,12 @@ class GalleryViewController: UIViewController {
     @IBOutlet var btnAdd: UIButton!
     @IBOutlet var btnSetting: UIButton!
     @IBOutlet var viewUploading: UIView!
+    @IBOutlet var lbJpegCount: UILabel!
+    @IBOutlet var lbJpegLimit: UILabel!
+    @IBOutlet var lbPngCount: UILabel!
+    @IBOutlet var lbPngLimit: UILabel!
+    @IBOutlet var lbHeicCount: UILabel!
+    @IBOutlet var lbHeicLimit: UILabel!
     
     var animationView = AnimationView()
     
@@ -24,6 +30,7 @@ class GalleryViewController: UIViewController {
     var alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
     
     var onSyncStatusChange = PublishSubject<SyncStatus>()
+    var onGetLimitData = PublishSubject<LimitData>()
     var onInitialList = PublishSubject<[ImageData]>()
     var onInsertList = PublishSubject<[Int]>()
     var onUpdateList = PublishSubject<[Int]>()
@@ -32,11 +39,10 @@ class GalleryViewController: UIViewController {
     
     lazy var viewModel = {
         return GalleryViewModel(GalleryViewOutput.init(onSyncStatusChange: onSyncStatusChange,
+                                                       onGetLimitData: onGetLimitData,
                                                        onInitialList: onInitialList,
                                                        onInsertList: onInsertList,
-                                                       onUpdateList: onUpdateList,
-                                                       onProcess: onProcess,
-                                                       onSuccess: onSuccess))
+                                                       onUpdateList: onUpdateList))
     }()
     
     var disposeBag = DisposeBag()
@@ -44,6 +50,7 @@ class GalleryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupReactive()
         setupAnimation()
     }
     
@@ -53,12 +60,11 @@ class GalleryViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        setupReactive()
+        viewModel.subscribe()
         animationView.play()
     }
     
     private func setupAnimation(){
-//        animationView.animation = Animation.named("lottie-upload")
         animationView.frame = viewUploading.bounds
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
@@ -66,8 +72,9 @@ class GalleryViewController: UIViewController {
         viewUploading.addSubview(animationView)
         viewUploading.alpha = 0
     }
-    
+        
     private func setupView(){
+        setupCollectionView()
         btnAdd.setImage(#imageLiteral(resourceName: "ic_add").withRenderingMode(.alwaysTemplate), for: .normal)
         btnAdd.tintColor = .white
         
@@ -75,8 +82,17 @@ class GalleryViewController: UIViewController {
         btnSetting.tintColor = .white
     }
     
+    private func setupCollectionView(){
+        let size = (UIScreen.main.bounds.width - 24) / 3
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        layout.itemSize = CGSize(width: size, height: size)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 8
+        collectionView!.collectionViewLayout = layout
+    }
+    
     private func setupReactive(){
-        
         onSyncStatusChange.subscribe(onNext: { syncStauts in
             switch syncStauts {
             case .uploading:
@@ -90,30 +106,59 @@ class GalleryViewController: UIViewController {
             self.controlAnimatin(isShow: syncStauts != .done)
         }).disposed(by: disposeBag)
         
+        onGetLimitData.asObserver().subscribe(onNext: { limitData in
+            self.lbJpegLimit.text = "\(limitData.jpeg)"
+            self.lbPngLimit.text = "\(limitData.png)"
+            self.lbHeicLimit.text = "\(limitData.heic)"
+        }).disposed(by: disposeBag)
+        
         onInitialList.asObservable().subscribe(onNext: { _ in
             self.collectionView.reloadSections([0])
+            self.setLimitLabel(imageType: nil)
         }).disposed(by: disposeBag)
         
         onInsertList.asObservable().subscribe(onNext: { indexs in
             self.collectionView.insertItems(at: indexs.map{ IndexPath(item:$0, section: 0) })
+            indexs.forEach{ self.setLimitLabel(imageType: self.viewModel.imageList[$0].fileType) }
         }).disposed(by: disposeBag)
         
         onUpdateList.asObservable().subscribe(onNext: { indexs in
             self.collectionView.reloadItems(at: indexs.map{ IndexPath(item: $0, section: 0) })
+            indexs.forEach{ self.setLimitLabel(imageType: self.viewModel.imageList[$0].fileType) }
         }).disposed(by: disposeBag)
-        
-        onSuccess.asObservable().subscribe(onNext: { id in
-            Log.info("onSuccess: \(id)")
-        }).disposed(by: disposeBag)
-        
-        onProcess.asObservable().subscribe(onNext: { id, percentComplete in
-            print("onSyncProgress: \(id), \(percentComplete)")
-        }).disposed(by: disposeBag)
-        
-        viewModel.subscribe()
     }
     
-    func openCamera(){
+    private func setLimitLabel(imageType: String?){
+        switch imageType?.uppercased() {
+        case Constant.FILE_JPEG:
+            setTextWithAnimation(uiLabel: self.lbJpegCount,
+                                 text: "\(self.viewModel.calLimitCount(iamgeType: Constant.FILE_JPEG))")
+        case Constant.FILE_PNG:
+            setTextWithAnimation(uiLabel: self.lbPngCount,
+                                 text: "\(self.viewModel.calLimitCount(iamgeType: Constant.FILE_PNG))")
+        case Constant.FILE_HEIC:
+            setTextWithAnimation(uiLabel: self.lbHeicCount,
+                                 text: "\(self.viewModel.calLimitCount(iamgeType: Constant.FILE_HEIC))")
+        default:
+            setTextWithAnimation(uiLabel: self.lbJpegCount,
+                                 text: "\(self.viewModel.calLimitCount(iamgeType: Constant.FILE_JPEG))")
+            setTextWithAnimation(uiLabel: self.lbPngCount,
+                                 text: "\(self.viewModel.calLimitCount(iamgeType: Constant.FILE_PNG))")
+            setTextWithAnimation(uiLabel: self.lbHeicCount,
+                                 text: "\(self.viewModel.calLimitCount(iamgeType: Constant.FILE_HEIC))")
+        }
+    }
+    
+    private func setTextWithAnimation(uiLabel: UILabel, text: String){
+        UIView.transition(with: uiLabel,
+                          duration: 0.25,
+                          options: .transitionCrossDissolve,
+                          animations: {
+            uiLabel.text = text
+        }, completion: nil)
+    }
+    
+    private func openCamera(){
         alert.dismiss(animated: true, completion: nil)
         if(UIImagePickerController .isSourceTypeAvailable(.camera)){
             picker.sourceType = .camera
@@ -128,6 +173,7 @@ class GalleryViewController: UIViewController {
             self.present(alertController, animated: true)
         }
     }
+    
     private func openGallery(){
         alert.dismiss(animated: true, completion: nil)
         picker.sourceType = .photoLibrary
@@ -186,6 +232,11 @@ extension GalleryViewController: UIImagePickerControllerDelegate, UINavigationCo
             fileType = fileURL.pathExtension
         }else {
             fileType = "jpeg"
+        }
+        
+        guard viewModel.validateLimitCount(imageType: fileType) else {
+            Log.info("file \(fileType) has max reached")
+            return
         }
         
         guard let image = info[.originalImage] as? UIImage else{

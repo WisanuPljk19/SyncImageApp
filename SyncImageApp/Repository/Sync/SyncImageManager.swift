@@ -76,7 +76,7 @@ final class SyncImageManager {
     }
     
     private func uploadImage(){
-        
+
         guard imageListOffline.count > 0 else {
             Log.info("stop processing list clear")
             changeSyncStatus(status: .done)

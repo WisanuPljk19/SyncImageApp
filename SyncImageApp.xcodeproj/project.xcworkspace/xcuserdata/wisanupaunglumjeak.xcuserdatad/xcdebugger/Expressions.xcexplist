@@ -3,57 +3,40 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "GalleryViewModel.saveImageData(imageData:):GalleryViewModel.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in FirebaseStorageManager.subscribeUploadTask(onProcess:onSuccess:):FirebaseStorageManager.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in SyncImageManager.getImageData():SyncImageManager.swift">
+         contextName = "closure #1 in GalleryViewModel.getImageData():GalleryViewModel.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.imageListOffline">
+               value = "self.imageList">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "FirebaseStorageManager.subscribeUploadTask(onProcess:onSuccess:):FirebaseStorageManager.swift">
+         contextName = "ViewController.imagePickerController(_:didFinishPickingMediaWithInfo:):ViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "uploadTask">
-            </PersistentString>
-            <PersistentString
-               value = " Utils.appDelegate().isTaskDoing">
+               value = "info[.imageURL] as? URL">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GalleryViewModel.subscribeTask():GalleryViewModel.swift">
+         contextName = "Repository.getLimitData():Repository.swift">
          <PersistentStrings>
             <PersistentString
-               value = "galleryViewOutput?.onProcess">
+               value = "realmManager.getLimitsEntity()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GalleryViewModel.syncImageUp():GalleryViewModel.swift">
-      </ContextState>
-      <ContextState
-         contextName = "Repository.updateLimitData(limitData:):Repository.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in Repository.getImageData():Repository.swift">
+         contextName = "ImageItem.setItem(imageData:):ImageItem.swift">
          <PersistentStrings>
             <PersistentString
-               value = "changeset?.inserted[0]">
-            </PersistentString>
-            <PersistentString
-               value = "imageEntities.first?.id">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FirebaseStorageManager.uploadImage(_:onSuccess:):FirebaseStorageManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "Utils.appDelegate().isTaskDoing">
+               value = "imageData.localPath">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -77,6 +60,28 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "FirebaseStorageManager.uploadImage(_:onSuccess:):FirebaseStorageManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Utils.appDelegate().isTaskDoing">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GalleryViewModel.calLimitCount(iamgeType:):GalleryViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageList.filter{ $0.fileType.uppercased() == iamgeType &amp;&amp; $0.syncDate == nil }.count">
+            </PersistentString>
+            <PersistentString
+               value = "imageList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GalleryViewModel.syncImageUp():GalleryViewModel.swift">
+      </ContextState>
+      <ContextState
          contextName = "GalleryViewController.setupAnimation():GalleryViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -85,10 +90,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in GalleryViewModel.getImageData():GalleryViewModel.swift">
+         contextName = "closure #1 in closure #1 in SyncImageManager.getImageData():SyncImageManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.imageList">
+               value = "self.imageListOffline">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -96,21 +101,13 @@
          contextName = "closure #2 in GalleryViewController.setupReactive():GalleryViewController.swift">
       </ContextState>
       <ContextState
-         contextName = "GalleryViewModel.saveImageData(imageData:):GalleryViewModel.swift">
-      </ContextState>
-      <ContextState
-         contextName = "ImageItem.setItem(imageData:):ImageItem.swift">
+         contextName = "closure #1 in Repository.getImageData():Repository.swift">
          <PersistentStrings>
             <PersistentString
-               value = "imageData.localPath">
+               value = "changeset?.inserted[0]">
             </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ViewController.imagePickerController(_:didFinishPickingMediaWithInfo:):ViewController.swift">
-         <PersistentStrings>
             <PersistentString
-               value = "info[.imageURL] as? URL">
+               value = "imageEntities.first?.id">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -123,10 +120,32 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Repository.getLimitData():Repository.swift">
+         contextName = "GalleryViewModel.subscribeTask():GalleryViewModel.swift">
          <PersistentStrings>
             <PersistentString
-               value = "realmManager.getLimitsEntity()">
+               value = "galleryViewOutput?.onProcess">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Repository.updateLimitData(limitData:):Repository.swift">
+      </ContextState>
+      <ContextState
+         contextName = "GalleryViewModel.validateLimitCount(imageType:):GalleryViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "calLimitCount(iamgeType: imageType)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FirebaseStorageManager.subscribeUploadTask(onProcess:onSuccess:):FirebaseStorageManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "uploadTask">
+            </PersistentString>
+            <PersistentString
+               value = " Utils.appDelegate().isTaskDoing">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
