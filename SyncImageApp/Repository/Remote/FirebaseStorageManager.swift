@@ -34,7 +34,7 @@ final class FirebaseStorageManager {
         let uploadTask = _storageRef
             .child(localUrl.lastPathComponent)
             .putFile(from: localUrl,
-                     metadata: buildStorageMetadata(contentType: imageData.contentType))
+                     metadata: buildStorageMetadata(fileType: imageData.fileType))
 
         uploadTask.observe(.progress) { snapshot in
             let percentComplete = Utils.calculatePercentComplete(complete: Float(snapshot.progress!.completedUnitCount),
@@ -67,9 +67,9 @@ final class FirebaseStorageManager {
 }
 
 extension FirebaseStorageManager {
-    func buildStorageMetadata(contentType: String) -> StorageMetadata{
+    func buildStorageMetadata(fileType: String) -> StorageMetadata{
         let metadata = StorageMetadata()
-        metadata.contentType = contentType
+        metadata.contentType = "image/\(fileType)"
         return metadata
     }
 }

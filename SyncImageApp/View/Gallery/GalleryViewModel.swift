@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import RxCocoa
 import RxSwift
+import RxRelay
 
 struct GalleryViewOutput {
+    var onUploading: PublishSubject<Bool>
     var onInitialList: PublishSubject<[ImageData]>
     var onInsertList: PublishSubject<[Int]>
     var onUpdateList: PublishSubject<[Int]>
@@ -19,7 +22,9 @@ struct GalleryViewOutput {
 class GalleryViewModel {
     
     var imageDataDisposeable: Disposable?
+    var uploadingDisposeable: Disposable?
     
+    let syncImageManager: SyncImageManager
     let repository: Repository
     let galleryViewOutput: GalleryViewOutput?
     
@@ -29,6 +34,7 @@ class GalleryViewModel {
     
     
     init(_ output: GalleryViewOutput?) {
+        self.syncImageManager = SyncImageManager.shared
         self.repository = Repository.shared
         self.galleryViewOutput = output
     }
@@ -63,11 +69,15 @@ class GalleryViewModel {
     }
     
     func subscribe(){
+        if let isUploading = galleryViewOutput?.onUploading {
+            uploadingDisposeable = syncImageManager.processingSubject.bind(to: isUploading)
+        }
         getImageData()
         repository.subscribeUploadTask(onProcess: galleryViewOutput?.onProcess, onSuccess: galleryViewOutput?.onSuccess)
     }
     
     func unsubscribe(){
+        uploadingDisposeable?.dispose()
         imageDataDisposeable?.dispose()
         repository.unsubscribeUploadTask()
     }

@@ -9,16 +9,21 @@ import UIKit
 import RxCocoa
 import RxSwift
 import RxRealm
+import Lottie
 
 class GalleryViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var btnAdd: UIButton!
     @IBOutlet var btnSetting: UIButton!
+    @IBOutlet var viewUploading: UIView!
+    
+    var animationView = AnimationView()
     
     var picker = UIImagePickerController();
     var alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
     
+    var onUploading = PublishSubject<Bool>()
     var onInitialList = PublishSubject<[ImageData]>()
     var onInsertList = PublishSubject<[Int]>()
     var onUpdateList = PublishSubject<[Int]>()
@@ -26,7 +31,8 @@ class GalleryViewController: UIViewController {
     var onSuccess = PublishSubject<String>()
     
     lazy var viewModel = {
-        return GalleryViewModel(GalleryViewOutput.init(onInitialList: onInitialList,
+        return GalleryViewModel(GalleryViewOutput.init(onUploading: onUploading,
+                                                       onInitialList: onInitialList,
                                                        onInsertList: onInsertList,
                                                        onUpdateList: onUpdateList,
                                                        onProcess: onProcess,
@@ -38,14 +44,27 @@ class GalleryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupAnimation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         viewModel.unsubscribe()
+        animationView.stop()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         setupReactive()
+        animationView.play()
+    }
+    
+    private func setupAnimation(){
+        animationView.animation = Animation.named("lottie-upload")
+        animationView.frame = viewUploading.bounds
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.animationSpeed = 0.5
+        viewUploading.addSubview(animationView)
+        viewUploading.alpha = 0
     }
     
     private func setupView(){
@@ -57,6 +76,10 @@ class GalleryViewController: UIViewController {
     }
     
     private func setupReactive(){
+        
+        onUploading.subscribe(onNext: { isUploading in
+            self.controlUploadingAnimatin(isUploading: isUploading)
+        }).disposed(by: disposeBag)
         
         onInitialList.asObservable().subscribe(onNext: { _ in
             self.collectionView.reloadSections([0])
@@ -96,18 +119,10 @@ class GalleryViewController: UIViewController {
             self.present(alertController, animated: true)
         }
     }
-    func openGallery(){
+    private func openGallery(){
         alert.dismiss(animated: true, completion: nil)
         picker.sourceType = .photoLibrary
         self.present(picker, animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func sync(_ button: UIButton) {
-        
     }
     
     @IBAction func addImage(_ button: UIButton){
@@ -134,9 +149,25 @@ class GalleryViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
+    private func controlUploadingAnimatin(isUploading: Bool) {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.viewUploading.alpha = isUploading ? 1 : 0
+        }, completion: { isSuccess in
+            if isUploading {
+                self.animationView.play()
+            }else {
+                self.animationView.stop()
+            }
+        })
+    }
 }
 
 extension GalleryViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         
@@ -155,14 +186,20 @@ extension GalleryViewController: UIImagePickerControllerDelegate, UINavigationCo
         image.recursiveReduce(expectSize: Constant.FILE_LIMIT_SIZE,
                               percentage: 0.8,
                               isOpaque: fileType.uppercased() == Constant.FILE_JPEG || fileType.uppercased() == Constant.FILE_HEIC) { isSuccess, imageReduce in
+            
+            guard let imageReduce = imageReduce else {
+                return
+            }
+            
             let imageName = self.viewModel.generateFileName(fileType: fileType)
-            guard let localPath = StorageManager.shared.saveImage(imageName: imageName, image: image) else {
+            
+            guard let localPath = StorageManager.shared.saveImage(imageName: imageName, image: imageReduce) else {
                 return
             }
             let imageData = ImageData(id: UUID().uuidString,
                                   name: imageName,
                                   localPath: localPath,
-                                  contentType: "image/\(fileType)")
+                                  fileType: fileType)
             DispatchQueue.main.async {
                 self.viewModel.saveImageData(imageData: imageData)
             }

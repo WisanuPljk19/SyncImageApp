@@ -19,24 +19,25 @@ final class SyncImageManager {
     private var disposeBag = DisposeBag()
     
     private var imageListOffline = [ImageData]()
+    var processingSubject = BehaviorSubject.init(value: false)
     private var isProcessing = false
     let reachability: Reachability! = try? Reachability()
     
     private init() {
         self.repository = Repository.shared
         try? reachability.startNotifier()
-        subscribeNetwork()
     }
     
     func subscribeNetwork(){
-//        reachability.rx.isReachable.subscribe(onNext: { isReachable in
-//            Log.info("internet status: \(isReachable)")
-//        }).disposed(by: disposeBag)
+        reachability.rx.isReachable.subscribe(onNext: { isReachable in
+            Log.info("internet status: \(isReachable)")
+        }).disposed(by: disposeBag)
     }
     
     func sync(){
+        subscribeNetwork()
         getImageData()
-//        uploadImage()
+        
     }
     
     func getImageData(){
@@ -49,10 +50,10 @@ final class SyncImageManager {
                     self.imageListOffline.append(imageDataList[index])
                 }
             default:
-                break
+                return
             }
-            if !self.isProcessing {
-//                self.uploadImage()
+            if let isProcessing = try? self.processingSubject.value(), !isProcessing {
+                self.uploadImage()
             }
         }).disposed(by: disposeBag)
     }
@@ -60,11 +61,12 @@ final class SyncImageManager {
     private func uploadImage(){
         guard imageListOffline.count > 0 else {
             Log.info("stop processing")
-            isProcessing = false
+            
+            processingSubject.onNext(false)
             return
         }
         Log.info("start processing")
-        isProcessing = true
+        processingSubject.onNext(true)
         
         repository.uploadImage(imageData: imageListOffline[0],
                                onSuccess: { id, remotePath in

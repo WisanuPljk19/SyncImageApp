@@ -36,12 +36,7 @@
          contextName = "GalleryViewModel.syncImageUp():GalleryViewModel.swift">
       </ContextState>
       <ContextState
-         contextName = "FirebaseStorageManager.uploadImage(_:onSuccess:):FirebaseStorageManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "Utils.appDelegate().isTaskDoing">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "Repository.updateLimitData(limitData:):Repository.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in Repository.getImageData():Repository.swift">
@@ -51,6 +46,14 @@
             </PersistentString>
             <PersistentString
                value = "imageEntities.first?.id">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FirebaseStorageManager.uploadImage(_:onSuccess:):FirebaseStorageManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Utils.appDelegate().isTaskDoing">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -66,7 +69,20 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Repository.updateLimitData(limitData:):Repository.swift">
+         contextName = "static Animation.named(_:bundle:subdirectory:animationCache:):AnimationPublic.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "bundle.bundlePath">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GalleryViewController.setupAnimation():GalleryViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Animation.named(&quot;lottie-upload&quot;, subdirectory: &quot;Animation&quot;)">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #1 in GalleryViewModel.getImageData():GalleryViewModel.swift">

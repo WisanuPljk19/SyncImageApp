@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36319BD42745F611007AA92A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 36319BD32745F611007AA92A /* Lottie */; };
+		36319BD72745F74D007AA92A /* lottie-upload.json in Resources */ = {isa = PBXBuildFile; fileRef = 36319BD62745F74D007AA92A /* lottie-upload.json */; };
 		3633C2672744F30400B91CF6 /* SyncImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3633C2662744F30400B91CF6 /* SyncImageManager.swift */; };
 		3633C26D2744FD4600B91CF6 /* RxReachability in Frameworks */ = {isa = PBXBuildFile; productRef = 3633C26C2744FD4600B91CF6 /* RxReachability */; };
 		3633C26F274552D200B91CF6 /* LimitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3633C26E274552D200B91CF6 /* LimitData.swift */; };
@@ -28,7 +30,7 @@
 		36A0BC582743611000959996 /* DateTimeFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC572743611000959996 /* DateTimeFormat.swift */; };
 		36A0BC5A2743619800959996 /* DateTimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC592743619800959996 /* DateTimeUtils.swift */; };
 		36A0BC5E2743835300959996 /* ImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC5D2743835300959996 /* ImageItem.swift */; };
-		36A0BC61274384EA00959996 /* UICircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC60274384EA00959996 /* UICircleView.swift */; };
+		36A0BC61274384EA00959996 /* UICustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC60274384EA00959996 /* UICustomView.swift */; };
 		36A0BC6427439DC000959996 /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = 36A0BC6327439DC000959996 /* RxRealm */; };
 		36A0BC662743FD6400959996 /* Realm+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC652743FD6400959996 /* Realm+.swift */; };
 		36A0BC6927440AE000959996 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 36A0BC6827440AE000959996 /* Kingfisher */; };
@@ -79,6 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		36319BD62745F74D007AA92A /* lottie-upload.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lottie-upload.json"; sourceTree = "<group>"; };
 		3633C2662744F30400B91CF6 /* SyncImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncImageManager.swift; sourceTree = "<group>"; };
 		3633C26E274552D200B91CF6 /* LimitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitData.swift; sourceTree = "<group>"; };
 		3633C2712745570500B91CF6 /* LimitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitsViewController.swift; sourceTree = "<group>"; };
@@ -97,7 +100,7 @@
 		36A0BC572743611000959996 /* DateTimeFormat.swift */ = {isa = PBXFileReference; indentWidth = 5; lastKnownFileType = sourcecode.swift; path = DateTimeFormat.swift; sourceTree = "<group>"; };
 		36A0BC592743619800959996 /* DateTimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeUtils.swift; sourceTree = "<group>"; };
 		36A0BC5D2743835300959996 /* ImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItem.swift; sourceTree = "<group>"; };
-		36A0BC60274384EA00959996 /* UICircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICircleView.swift; sourceTree = "<group>"; };
+		36A0BC60274384EA00959996 /* UICustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICustomView.swift; sourceTree = "<group>"; };
 		36A0BC652743FD6400959996 /* Realm+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+.swift"; sourceTree = "<group>"; };
 		36A0BC6A27449C2F00959996 /* RealmChangesetEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmChangesetEnums.swift; sourceTree = "<group>"; };
 		36D0A7E62742521300ABD08E /* SyncImageApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SyncImageApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +141,7 @@
 				36A0BC402742BB3100959996 /* RxSwift in Frameworks */,
 				36D0A829274252FE00ABD08E /* FirebaseStorageSwift-Beta in Frameworks */,
 				36D0A8332742543F00ABD08E /* Realm in Frameworks */,
+				36319BD42745F611007AA92A /* Lottie in Frameworks */,
 				36A0BC6427439DC000959996 /* RxRealm in Frameworks */,
 				36D0A821274252FE00ABD08E /* FirebaseStorageCombine-Community in Frameworks */,
 				36D0A82E274253F700ABD08E /* SwiftyBeaver in Frameworks */,
@@ -164,6 +168,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36319BD52745F73E007AA92A /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				36319BD62745F74D007AA92A /* lottie-upload.json */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
 		3633C2652744E20F00B91CF6 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,7 +260,7 @@
 		36A0BC5F274384CF00959996 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				36A0BC60274384EA00959996 /* UICircleView.swift */,
+				36A0BC60274384EA00959996 /* UICustomView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -276,6 +288,7 @@
 		36D0A7E82742521300ABD08E /* SyncImageApp */ = {
 			isa = PBXGroup;
 			children = (
+				36319BD52745F73E007AA92A /* Animation */,
 				36D0A849274255F300ABD08E /* Storyboard */,
 				36D0A848274255E200ABD08E /* App */,
 				36D0A847274255C900ABD08E /* Configs */,
@@ -437,6 +450,7 @@
 				36A0BC6327439DC000959996 /* RxRealm */,
 				36A0BC6827440AE000959996 /* Kingfisher */,
 				3633C26C2744FD4600B91CF6 /* RxReachability */,
+				36319BD32745F611007AA92A /* Lottie */,
 			);
 			productName = SyncImageApp;
 			productReference = 36D0A7E62742521300ABD08E /* SyncImageApp.app */;
@@ -517,6 +531,7 @@
 				36A0BC6227439DC000959996 /* XCRemoteSwiftPackageReference "RxRealm" */,
 				36A0BC6727440AE000959996 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				3633C26B2744FD4600B91CF6 /* XCRemoteSwiftPackageReference "RxReachability" */,
+				36319BD22745F610007AA92A /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 36D0A7E72742521300ABD08E /* Products */;
 			projectDirPath = "";
@@ -534,6 +549,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36319BD72745F74D007AA92A /* lottie-upload.json in Resources */,
 				36D0A7F62742521600ABD08E /* LaunchScreen.storyboard in Resources */,
 				36D0A84B274259CE00ABD08E /* GoogleService-Info.plist in Resources */,
 				36D0A7F32742521600ABD08E /* Assets.xcassets in Resources */,
@@ -565,7 +581,7 @@
 				36A0BC322742AE3600959996 /* String+.swift in Sources */,
 				36A0BC4727433BF900959996 /* FIRStorageReference+Rx.swift in Sources */,
 				3633C26F274552D200B91CF6 /* LimitData.swift in Sources */,
-				36A0BC61274384EA00959996 /* UICircleView.swift in Sources */,
+				36A0BC61274384EA00959996 /* UICustomView.swift in Sources */,
 				36A0BC6B27449C2F00959996 /* RealmChangesetEnums.swift in Sources */,
 				36A0BC392742B03C00959996 /* GalleryViewModel.swift in Sources */,
 				3633C2742745572500B91CF6 /* LimitsViewModel.swift in Sources */,
@@ -927,6 +943,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		36319BD22745F610007AA92A /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		3633C26B2744FD4600B91CF6 /* XCRemoteSwiftPackageReference "RxReachability" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxReachability.git";
@@ -986,6 +1010,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		36319BD32745F611007AA92A /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 36319BD22745F610007AA92A /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		3633C26C2744FD4600B91CF6 /* RxReachability */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3633C26B2744FD4600B91CF6 /* XCRemoteSwiftPackageReference "RxReachability" */;

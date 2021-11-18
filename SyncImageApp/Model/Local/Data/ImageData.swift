@@ -11,22 +11,22 @@ class ImageData {
     var id: String
     var name: String
     var localPath: String
-    var contentType: String
+    var fileType: String
     var remotePath: String? = nil
     var syncDate: Date? = nil
     
-    init(id: String, name: String, localPath: String, contentType: String) {
+    init(id: String, name: String, localPath: String, fileType: String) {
         self.id = id
         self.name = name
         self.localPath = localPath
-        self.contentType = contentType
+        self.fileType = fileType
     }
     
     class func buildImageDataFrom(imageEntity: ImageEntity) -> ImageData {
         let imageData = ImageData(id: imageEntity.id,
                                   name: imageEntity.name,
                                   localPath: imageEntity.localPath,
-                                  contentType: imageEntity.contentType)
+                                  fileType: imageEntity.fileType)
         imageData.updateDataSync(syncData: imageEntity.syncDate, remotePath: imageEntity.remotePath)
         return imageData
     }
