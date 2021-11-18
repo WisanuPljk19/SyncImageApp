@@ -20,7 +20,7 @@ final class SyncImageManager {
     
     private var imageListOffline = [ImageData]()
     private var isProcessing = false
-    private let reachability: Reachability! = try? Reachability()
+    let reachability: Reachability! = try? Reachability()
     
     private init() {
         self.repository = Repository.shared
@@ -29,9 +29,9 @@ final class SyncImageManager {
     }
     
     func subscribeNetwork(){
-        reachability.rx.isReachable.subscribe(onNext: { isReachable in
-            Log.info("internet status: \(isReachable)")
-        }).disposed(by: disposeBag)
+//        reachability.rx.isReachable.subscribe(onNext: { isReachable in
+//            Log.info("internet status: \(isReachable)")
+//        }).disposed(by: disposeBag)
     }
     
     func sync(){

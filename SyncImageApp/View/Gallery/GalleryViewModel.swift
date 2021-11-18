@@ -37,7 +37,10 @@ class GalleryViewModel {
         imageDataDisposeable = repository.getImageData().subscribe(onNext: { changeset, imageDataList, indexs in
             switch changeset {
             case .initial:
-                self.imageList.append(contentsOf: imageDataList)
+                guard self.imageList.count != imageDataList.count else {
+                    return
+                }
+                self.imageList = imageDataList
                 self.galleryViewOutput?.onInitialList.onNext(imageDataList)
             case .insert:
                 indexs.forEach { index in

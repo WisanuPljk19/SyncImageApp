@@ -11,6 +11,7 @@ import RxSwift
 
 class LimitsViewController: UIViewController {
     
+    @IBOutlet var lbApp: UILabel!
     @IBOutlet var btnSave: UIButton!
     @IBOutlet var tfJpeg: UITextField!
     @IBOutlet var tfPng: UITextField!
@@ -38,6 +39,11 @@ class LimitsViewController: UIViewController {
     }
     
     private func setupReactive(){
+        
+        SyncImageManager.shared.reachability.rx.isReachable.subscribe(onNext: { isReachable in
+            Log.info("internet status: \(isReachable)")
+            self.lbApp.text = "\(isReachable)"
+        }).disposed(by: disposeBag)
         tfJpeg
             .rx
             .controlEvent(.editingChanged)
