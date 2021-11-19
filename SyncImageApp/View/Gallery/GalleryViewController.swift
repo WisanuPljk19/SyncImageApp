@@ -10,6 +10,7 @@ import RxCocoa
 import RxSwift
 import RxRealm
 import Lottie
+import CoreServices
 
 class GalleryViewController: UIViewController {
     
@@ -26,7 +27,15 @@ class GalleryViewController: UIViewController {
     
     var animationView = AnimationView()
     
-    var picker = UIImagePickerController();
+    var imagePicker = UIImagePickerController()
+    lazy var documentPicker: UIDocumentPickerViewController = {
+        if #available(iOS 14.0, *) {
+            return UIDocumentPickerViewController(forOpeningContentTypes: [.png,.jpeg, .heic], asCopy: true)
+        } else {
+            return UIDocumentPickerViewController(documentTypes: [String(kUTTypePNG), String(kUTTypeJPEG)], in: .import)
+        }
+    }()
+    
     var alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
     
     var onSyncStatusChange = PublishSubject<SyncStatus>()
@@ -74,12 +83,16 @@ class GalleryViewController: UIViewController {
     }
         
     private func setupView(){
+        imagePicker.delegate = self
+        documentPicker.delegate = self
+        documentPicker.allowsMultipleSelection = true
         setupCollectionView()
         btnAdd.setImage(#imageLiteral(resourceName: "ic_add").withRenderingMode(.alwaysTemplate), for: .normal)
         btnAdd.tintColor = .white
         
         btnSetting.setImage(#imageLiteral(resourceName: "ic_setting").withRenderingMode(.alwaysTemplate), for: .normal)
         btnSetting.tintColor = .white
+        self.setLimitLabel(imageType: nil)
     }
     
     private func setupCollectionView(){
@@ -161,8 +174,8 @@ class GalleryViewController: UIViewController {
     private func openCamera(){
         alert.dismiss(animated: true, completion: nil)
         if(UIImagePickerController .isSourceTypeAvailable(.camera)){
-            picker.sourceType = .camera
-            self.present(picker, animated: true, completion: nil)
+            imagePicker.sourceType = .camera
+            self.present(imagePicker, animated: true, completion: nil)
         } else {
             let alertController: UIAlertController = {
                 let controller = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
@@ -176,8 +189,13 @@ class GalleryViewController: UIViewController {
     
     private func openGallery(){
         alert.dismiss(animated: true, completion: nil)
-        picker.sourceType = .photoLibrary
-        self.present(picker, animated: true, completion: nil)
+        imagePicker.sourceType = .photoLibrary
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    private func openFile(){
+        alert.dismiss(animated: true, completion: nil)
+        self.present(documentPicker, animated: true, completion: nil)
     }
     
     @IBAction func addImage(_ button: UIButton){
@@ -188,18 +206,24 @@ class GalleryViewController: UIViewController {
             UIAlertAction in
             self.openCamera()
         }
+        
         let galleryAction = UIAlertAction(title: "Gallery", style: .default){
             UIAlertAction in
             self.openGallery()
         }
+        
+        let fileAction = UIAlertAction(title: "File", style: .default){
+            UIAlertAction in
+            self.openFile()
+        }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel){
             UIAlertAction in
         }
         
-        // Add the actions
-        picker.delegate = self
         alert.addAction(cameraAction)
         alert.addAction(galleryAction)
+        alert.addAction(fileAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }
@@ -215,34 +239,23 @@ class GalleryViewController: UIViewController {
             }
         })
     }
-}
-
-extension GalleryViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
+    func validateImportImage(fileType: String) -> Bool{
+        guard viewModel.validateLimitCount(imageType: fileType) else {
+            Utils.presentBanner(title: "cann't import image",
+                                subTitle: "Because count of offline files (\(fileType) has reached its limit.",
+                                style: .warning)
+            return false
+        }
+        return true
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true, completion: nil)
+    func processImageImport(image: UIImage, fileType: String){
         
-        var fileType: String
-        if picker.sourceType == .photoLibrary,
-           let fileURL = info[.imageURL] as? URL {
-            fileType = fileURL.pathExtension
-        }else {
-            fileType = "jpeg"
-        }
-        
-        guard viewModel.validateLimitCount(imageType: fileType) else {
-            Log.info("file \(fileType) has max reached")
+        guard validateImportImage(fileType: fileType) else {
             return
         }
         
-        guard let image = info[.originalImage] as? UIImage else{
-            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
-        }
-
         image.recursiveReduce(expectSize: Constant.FILE_LIMIT_SIZE,
                               percentage: 0.8,
                               isOpaque: fileType.uppercased() == Constant.FILE_JPEG || fileType.uppercased() == Constant.FILE_HEIC) { isSuccess, imageReduce in
@@ -264,6 +277,50 @@ extension GalleryViewController: UIImagePickerControllerDelegate, UINavigationCo
                 self.viewModel.saveImageData(imageData: imageData)
             }
         }
+    }
+}
+
+extension GalleryViewController: UIDocumentPickerDelegate {
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        controller.dismiss(animated: true) {
+            guard let url = urls.first,
+                  let image = UIImage(contentsOfFile: url.path) else {
+                return
+            }
+            
+            self.processImageImport(image: image, fileType: url.pathExtension.lowercased())
+        }
+    }
+}
+
+extension GalleryViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: { self.storeImage(info: info) })
+    }
+    
+    private func storeImage(info: [UIImagePickerController.InfoKey : Any]){
+        var fileType: String
+        if imagePicker.sourceType == .photoLibrary,
+           let fileURL = info[.imageURL] as? URL {
+            fileType = fileURL.pathExtension
+        }else {
+            fileType = "jpeg"
+        }
+        
+        guard let image = info[.originalImage] as? UIImage else{
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+
+        processImageImport(image: image, fileType: fileType)
     }
 }
 

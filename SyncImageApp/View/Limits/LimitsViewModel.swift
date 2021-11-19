@@ -25,10 +25,10 @@ class LimitsViewModel {
     func validateLimitData() -> (Bool, String?) {
         if limitData.jpeg < 0 || limitData.png < 0 || limitData.heic < 0 {
             //error less than zero
-            return (false, "All image type must be quantity greater more than or equal zero")
+            return (false, "Each type must have a quantity of 0 or more.")
         } else if summaryLimits() < 100 {
             //error sum less than zero
-            return (false, "summary all type not below 100")
+            return (false, "All types combined must be greater than 100.")
         }
         
         return (true, nil)

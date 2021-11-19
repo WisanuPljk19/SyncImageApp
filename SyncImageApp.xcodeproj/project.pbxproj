@@ -15,6 +15,7 @@
 		3633C26F274552D200B91CF6 /* LimitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3633C26E274552D200B91CF6 /* LimitData.swift */; };
 		3633C2722745570500B91CF6 /* LimitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3633C2712745570500B91CF6 /* LimitsViewController.swift */; };
 		3633C2742745572500B91CF6 /* LimitsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3633C2732745572500B91CF6 /* LimitsViewModel.swift */; };
+		364758CB2747357000A16023 /* NotificationBannerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 364758CA2747357000A16023 /* NotificationBannerSwift */; };
 		36A0BC302742AD7E00959996 /* LimitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC2F2742AD7E00959996 /* LimitEntity.swift */; };
 		36A0BC322742AE3600959996 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC312742AE3600959996 /* String+.swift */; };
 		36A0BC362742AE7B00959996 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BC352742AE7B00959996 /* UIImage+.swift */; };
@@ -141,6 +142,7 @@
 				36D0A825274252FE00ABD08E /* FirebaseCrashlytics in Frameworks */,
 				36D0A827274252FE00ABD08E /* FirebaseStorage in Frameworks */,
 				36A0BC402742BB3100959996 /* RxSwift in Frameworks */,
+				364758CB2747357000A16023 /* NotificationBannerSwift in Frameworks */,
 				36D0A829274252FE00ABD08E /* FirebaseStorageSwift-Beta in Frameworks */,
 				36D0A8332742543F00ABD08E /* Realm in Frameworks */,
 				36319BD42745F611007AA92A /* Lottie in Frameworks */,
@@ -462,6 +464,7 @@
 				36A0BC6827440AE000959996 /* Kingfisher */,
 				3633C26C2744FD4600B91CF6 /* RxReachability */,
 				36319BD32745F611007AA92A /* Lottie */,
+				364758CA2747357000A16023 /* NotificationBannerSwift */,
 			);
 			productName = SyncImageApp;
 			productReference = 36D0A7E62742521300ABD08E /* SyncImageApp.app */;
@@ -543,6 +546,7 @@
 				36A0BC6727440AE000959996 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				3633C26B2744FD4600B91CF6 /* XCRemoteSwiftPackageReference "RxReachability" */,
 				36319BD22745F610007AA92A /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				364758C92747357000A16023 /* XCRemoteSwiftPackageReference "NotificationBanner" */,
 			);
 			productRefGroup = 36D0A7E72742521300ABD08E /* Products */;
 			projectDirPath = "";
@@ -971,6 +975,14 @@
 				minimumVersion = 1.2.1;
 			};
 		};
+		364758C92747357000A16023 /* XCRemoteSwiftPackageReference "NotificationBanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Daltron/NotificationBanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		36A0BC3C2742BB3000959996 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -1031,6 +1043,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3633C26B2744FD4600B91CF6 /* XCRemoteSwiftPackageReference "RxReachability" */;
 			productName = RxReachability;
+		};
+		364758CA2747357000A16023 /* NotificationBannerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 364758C92747357000A16023 /* XCRemoteSwiftPackageReference "NotificationBanner" */;
+			productName = NotificationBannerSwift;
 		};
 		36A0BC3D2742BB3100959996 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -72,7 +72,9 @@ class LimitsViewController: UIViewController {
     @IBAction func savePress(_ sender: Any) {
         let (isPass, message) = viewModel.validateLimitData()
         guard isPass else {
-            Log.info("save limit invalidate: \(message!)")
+            Utils.presentBanner(title: "Can't save",
+                                subTitle: message ?? "",
+                                style: .warning)
             return
         }
         viewModel.updateLimits()
