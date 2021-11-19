@@ -30,6 +30,8 @@ class GalleryViewModel {
     
     var limitData: LimitData!
     var imageList = [ImageData]()
+    
+    var fileTypes = [Constant.FILE_JPEG, Constant.FILE_PNG, Constant.FILE_HEIC]
 
     
     
@@ -114,5 +116,9 @@ class GalleryViewModel {
             fatalError("invalid image type")
         }
         return calLimitCount(iamgeType: imageType) - limit < 0
+    }
+    
+    func validateFileType(fileType: String) -> Bool{
+        return fileTypes.contains(where: { $0 == fileType.uppercased() })
     }
 }

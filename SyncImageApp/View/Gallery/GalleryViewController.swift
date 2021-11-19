@@ -243,7 +243,7 @@ class GalleryViewController: UIViewController {
     func validateImportImage(fileType: String) -> Bool{
         guard viewModel.validateLimitCount(imageType: fileType) else {
             Utils.presentBanner(title: "cann't import image",
-                                subTitle: "Because count of offline files (\(fileType) has reached its limit.",
+                                subTitle: "Because count of offline files (\(fileType)) has reached its limit.",
                                 style: .warning)
             return false
         }
@@ -309,8 +309,14 @@ extension GalleryViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     private func storeImage(info: [UIImagePickerController.InfoKey : Any]){
         var fileType: String
-        if imagePicker.sourceType == .photoLibrary,
-           let fileURL = info[.imageURL] as? URL {
+        if imagePicker.sourceType == .photoLibrary {
+            guard let fileURL = info[.imageURL] as? URL,
+                  viewModel.validateFileType(fileType: fileURL.pathExtension) else {
+                      Utils.presentBanner(title: "Unsupported this image type",
+                                          subTitle: "Please select an image of jpeg, png, hec type.",
+                                          style: .warning)
+                      return
+                  }
             fileType = fileURL.pathExtension
         }else {
             fileType = "jpeg"
